@@ -23,7 +23,6 @@ const Sitebar = (props) => { //2
     const toggle = () => {
         let newIsOpen = !isOpen;
         setIsOpen(newIsOpen);
-        console.log("in toggle....isOpen : ", isOpen)
     }
 //3
 return (
@@ -31,7 +30,7 @@ return (
         <NavbarBrand href="/">Event Jar</NavbarBrand>
         {/* Logout button */}
         <NavbarToggler onClick={toggle}/>
-        <Collapse isOpen={isOpen} navbar>  {/* what's this do? */}
+        <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
                 <NavItem>
                     <Button onClick={props.clickLogout}>Logout</Button>
