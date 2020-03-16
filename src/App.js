@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Sitebar from './home/Navbar';
 import Auth from './auth/Auth';
-import JarContainer from './eventJar/JarContainer';
+import DisplayContainers from './eventJar/DisplayContainers';
 
 /*
 1. We are using the useState hook to create a new state variable, sessionToken.  Because our sessionToken will change during the course of our app running (it will start empty, be given a value upon logging in, then emptied upon logout), we also use the second argument of useState, which allows us to change our sessionToken state variable.
@@ -68,12 +68,12 @@ function App() {
     This is an interesting function, and definitely worth our time to investigate.  The entire function returns the result of our ternary expression, which checks to see if our sessionToken state variable matches the token property in localStorage.  If the two match (which can only happen when they store the same sessionToken string), then the function fires off the WorkoutIndex component.  Otherwise, this function will return our Auth component so the user can attempt to grab a sessionToken through our server.  The reason the sessionToken variable can only match the token property in local storage when they both store a token is due to how we've built the clearToken function in App.js.  When there is no session token, the sessionToken state variable is reset to '', an empty string, while the localStorage is cleared, erasing our token property.  When an object has no property, it's undefined.  Therefore, the empty string stored by our sessionToken state variable is strictly unequal to the undefined token property in localStorage, and our Auth component is fired.
   */
   const protectedViews = () => {
-    console.log("************ in protectedViews - if sessionToken === token in localStorge, call JarContainer to get jar contents. Else call Auth to login *******")
+    console.log("************ in protectedViews - if sessionToken === token in localStorge, call DisplayContainers to get jar contents. Else call Auth to login *******")
     console.log("sessionToken: ", sessionToken);
     console.log("localStorage token: ", localStorage.getItem('token'));
     return (
       sessionToken === localStorage.getItem('token') ? 
-      <JarContainer token={sessionToken}/> : 
+      <DisplayContainers token={sessionToken}/> : 
       <Auth updateToken={updateToken}/>
       )
   }
