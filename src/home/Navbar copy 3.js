@@ -6,7 +6,8 @@ and feel free to take a look here for more information on the component bootstra
 3. Notice we are rendering a single parent element, <Navbar>, in this case, which holds the child element <NavbarBrand>. React enforces this 1-parent rule for all of its components.
 */
 import React, { useState } from 'react';
-// import { Form } from 'react-bootstrap-validation';
+import { Form } from 'react-bootstrap-validation';
+import {FormControl} from 'bootstrap';
 
 import { isCompositeComponentWithType } from 'react-dom/test-utils';
 
@@ -56,10 +57,10 @@ const Sitebar = (props) => { //2
                         </FormControl>
                     </Form> */}
 
-                     {/* <Form inline>
+                     <Form inline>
                         <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
                         <Button type="submit">Submit</Button>
-                    </Form> */}
+                    </Form>
                {/*     <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
