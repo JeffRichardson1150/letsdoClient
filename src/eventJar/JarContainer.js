@@ -8,11 +8,13 @@ using code from WorkoutTable.js
 
 4.  We include two buttons that are non-functional right now.  That's alright.  Having the UI present moves the needle a little closer to the goal!
 */
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Table, Button} from 'reactstrap';
 import APIURL from '../helpers/environment.js'
 
-const JarDisplay = (props) => {
+const JarContainer = (props) => {
+        //  ################################ for the Jar button on an event to store in the jar table ################################
+    console.log("addEventToJar state variable = ", props.addEventToJar)
 console.log(props)
     // Need to convert this code to suit my jars vs workouts
     // workouts is a state variable / my state variable is jarEvent...it's set to logData in fetchWorkouts (fetchJarEvents in JarFetch.js) 
@@ -44,12 +46,13 @@ console.log(props)
 
     // Convert this workouts code to apply to my jars 
     const jarEventMapper = () => {
+        console.log("You're in jarEventMapper. props = ", props)
         return props.jarEvents.map((jarEvent, index) => {
             return(
                 <tr key={index}>
                     <th scope="row">{jarEvent.id}</th>
                     <td>{jarEvent.category}</td>
-                    <td>{jarEvent.city}</td>
+                    <td>{jarEvent.title}</td>
                     <td>{jarEvent.date}</td>
                     <td>
                         <Button color="warning">Update</Button>
@@ -60,6 +63,14 @@ console.log(props)
         })
     }
 
+    //  ################################ for the Jar button on an event to store in the jar table ################################
+    useEffect(() => {
+        console.log ("***** You're in the JarContainer useEffect watching addEventToJar, the Jar button on the Event Container. changed to: ", props.addEventToJar)
+        // create jar event
+        // jarEventMapper();
+        // ??? EventContainer(props.addEventToJar);
+    }, [props.addEventToJar])
+
     return(
         <>
         <h3>My Jar</h3>
@@ -69,8 +80,8 @@ console.log(props)
                 <tr>
                     <th>#</th>
                     <th>Category</th>
-                    <th>Event Location</th>
-                    <th>Event Date</th>
+                    <th>Event</th>
+                    <th>Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -81,4 +92,4 @@ console.log(props)
     )
 }
 
-export default JarDisplay;
+export default JarContainer;

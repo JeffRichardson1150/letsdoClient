@@ -5,6 +5,8 @@ import APIURL from '../helpers/environment.js'
 
 
 const JarEventCreate = (props) => {
+
+    console.log("You're in JarEventCreate")
     const [userName, setUserName] = useState('User Name');
     const [category, setCategory] = useState('Event Category');
     const [deleteBox, setDeleteBox] = useState(false);
@@ -61,7 +63,7 @@ const JarEventCreate = (props) => {
 
     return(
     <>
-    <h3>Create a Jar Event</h3>
+    {/* <h3>Create a Jar Event</h3>
     <Form onSubmit={handleSubmit}>
         <FormGroup>
             <Label htmlFor="city"/>
@@ -82,7 +84,7 @@ const JarEventCreate = (props) => {
         <FormGroup>
             <Button type="submit">Click to Submit</Button>
         </FormGroup>
-    </Form>
+    </Form> */}
     </>
 
     )

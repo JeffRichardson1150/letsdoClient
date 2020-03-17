@@ -53,7 +53,7 @@ const Sitebar = (props) => { //2
     //3
     return (
         <Navbar color="faded" light expand="md">
-            <NavbarBrand href="/">Event Jar</NavbarBrand>
+            <NavbarBrand href="/">Letsdo</NavbarBrand>
             {/* Logout button */}
             <NavbarToggler onClick={toggle} />
             <Collapse isOpen={isOpen} navbar>  {/* what's this do? */}
@@ -82,14 +82,38 @@ const Sitebar = (props) => { //2
 
                     <UncontrolledDropdown nav inNavbar>
                         <DropdownToggle nav caret>
-                            Options
+                            Categories
                   </DropdownToggle>
                         <DropdownMenu right>
                             <DropdownItem>
-                                Option 1
+                                Music
                     </DropdownItem>
                             <DropdownItem>
-                                Option 2
+                                Comedy
+                    </DropdownItem>
+                            <DropdownItem>
+                                Sports
+                    </DropdownItem>
+                            <DropdownItem>
+                                Kids and Family
+                    </DropdownItem>
+                            <DropdownItem>
+                                Festivals
+                    </DropdownItem>
+                            <DropdownItem>
+                                Film
+                    </DropdownItem>
+                            <DropdownItem>
+                                Food and Wine
+                    </DropdownItem>
+                            <DropdownItem>
+                                Nightlife and Singles
+                    </DropdownItem>
+                            <DropdownItem>
+                                Business Networking
+                    </DropdownItem>
+                            <DropdownItem>
+                                Education
                     </DropdownItem>
                             <DropdownItem divider />
                             <DropdownItem>

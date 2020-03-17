@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Table, Button} from 'reactstrap';
 import APIURL from '../helpers/environment.js'
+import JarEventCreate from '../eventJar/JarEventCreate'
+import CopyEventToJar from './CopyEventToJar'
 
 let props = {event:
 [
     {
         userName: "jeffrichardson573@gmail.com",
-        category: "Festival",
+        category: "Music",
         deleteBox: false,
         eventURL: "http://newyorkcity.eventful.com/events/daughtry-bergen-pac-/E0-001-071934718-7?utm_source=apis&utm_medium=apim&utm_campaign=apic",
         eventImage: "http://d1marr3m5x4iac.cloudfront.net/images/medium/I0-001/040/825/885-9.jpeg_/daughtry-85.jpeg",
@@ -22,7 +24,7 @@ let props = {event:
     },
     {
         userName: "jeffrichardson573@gmail.com",
-        category: "Festival",
+        category: "Music",
         deleteBox: false,
         eventURL: "http://newyorkcity.eventful.com/events/hella-mega-tourgreen-dayfall-out-boyweezer-pr-/E0-001-130407856-7?utm_source=apis&utm_medium=apim&utm_campaign=apic",
         eventImage: "http://d1marr3m5x4iac.cloudfront.net/images/medium/I0-001/002/547/642-7.jpeg_/green-day-42.jpeg",
@@ -38,7 +40,7 @@ let props = {event:
     },
     {
         userName: "jeffrichardson573@gmail.com",
-        category: "Festival",
+        category: "Music",
         deleteBox: false,
         eventURL: "http://newyorkcity.eventful.com/events/kenny-chesney-florida-georgia-line-and-old-d-/E0-001-130867951-3?utm_source=apis&utm_medium=apim&utm_campaign=apic",
         eventImage: "http://d1marr3m5x4iac.cloudfront.net/images/medium/I0-001/003/648/014-3.png_/kenny-chesney-14.png",
@@ -56,6 +58,7 @@ let props = {event:
 ]
 }
 
+// const EventContainer = (props) => {
 const EventContainer = () => {
 console.log("**** You're in EventContainer. props = ", props)
     // Need to convert this code to suit my jars vs workouts
@@ -85,19 +88,40 @@ console.log("**** You're in EventContainer. props = ", props)
         .then(() => props.fetchEvents())
     }
 
+        //  ################################ for the Jar button on an event to store in the jar table ################################
+    const putInJar = (event) => {
+        console.log("Put the event in the jar. event = ", event)
+        return(
+        <JarEventCreate event={event} />
+        )
+        // return (
+        // // <CopyEventToJar event={event} token={sessionToken} />
+        // // return props.setAddEventToJar=true;
+        // props.setAddEventToJar(true)
+        // // console.log("addEventToJar was set?")
+        // // JarEventCreate(fetchJarEvents, props.token)
+        // )
+    }
+
 
     // Convert this workouts code to apply to my jars 
-    const eventMapper = () => {
-        return props.event.map((event, index) => {
+    const eventMapper = (events) => {
+        console.log("in eventMapper. events = ", events)
+        return events.map((event, index) => {
             return(
                 <tr key={index}>
                     <th scope="row">{event.id}</th>
                     <td>{event.category}</td>
-                    <td>{event.city}</td>
+                    <td>{event.title}</td>
                     <td>{event.date}</td>
                     <td>
-                        <Button color="warning">Update</Button>
-                        <Button color="danger" onClick={() => {deleteEvent(event)}}>Delete</Button>
+                        <Button color="warning" onClick={() => putInJar(event)}>Jar</Button>
+                        {/* <Button color="warning" onClick={() => {putInJar(event)}}>Jar</Button> */}
+                        {/* <Button color="warning" onClick={() => function()}}>Jar</Button> */}
+                        {/* <Button color="warning" onClick={JarEventCreate}>Jar</Button> */}
+                        {/* <Button color="warning" onClick={<JarEventCreate events={props.event} />}>Jar</Button> */}
+                        {/* <Button color="warning" onClick={JarEventCreate}>Jar</Button> */}
+                        {/* <Button color="danger" onClick={() => {deleteEvent(event)}}>Delete</Button> */}
                     </td>
                 </tr>
             )
@@ -113,12 +137,15 @@ console.log("**** You're in EventContainer. props = ", props)
                 <tr>
                     <th>#</th>
                     <th>Category</th>
-                    <th>Event Location</th>
-                    <th>Event Date</th>
+                    <th>Event</th>
+                    <th>Date</th>
                 </tr>
             </thead>
             <tbody>
-                {eventMapper(props.events)} */}
+                {/* {eventMapper('junk')}  */}
+                {console.log(props.event)}
+                {eventMapper(props.event)} 
+                {/* {eventMapper(events)}  */}
             </tbody>
         </Table>
         </>
