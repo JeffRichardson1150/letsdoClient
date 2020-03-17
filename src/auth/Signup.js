@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';  //1
+import APIURL from '../helpers/environment.js'
+
 
 /*
 1. Our use of bootstrap is the same as in our Login component.  Ultimately, these forms contain the same information, but differ only in their titles and the action they initiate with our server when a successful user account is made or processed.
@@ -20,7 +22,8 @@ const Signup = (props) => {
         event.preventDefault();  // prevent refresh of the screen from a Form submit
         console.log( JSON.stringify({user:{username: username, password: password}}) );
         console.log( JSON.stringify({username: username, password: password}) );
-        fetch("http://localhost:3000/api/user", {
+        // fetch("http://localhost:3000/api/user", {
+        fetch(`${APIURL}/api/user`, {
             method: 'POST',
             body: JSON.stringify({userName: username, password: password}),
             headers: new Headers({

@@ -18,6 +18,7 @@ import { isCompositeComponentWithType } from 'react-dom/test-utils';
 //     NavDropdown, MenuItem, Tabs, ButtonToolbar, Button, Table, ButtonGroup, Row, Col, Grid, Panel, Form, FormGroup, FormControl} from 'react-bootstrap';
 
 import { //1
+    Form, FormGroup, Label, Input,
     Collapse,
     Navbar,
     NavbarToggler,
@@ -32,10 +33,17 @@ import { //1
     DropdownItem
 } from 'reactstrap';
 
+// import {Form, FormGroup, Label, Input, Button} from 'reactstrap';  //1
+
+
 
 const Sitebar = (props) => { //2
+    
+    console.log("************ HELLO FROM SITEBAR IN NAVBAR.JS ****************")
 
     const [isOpen, setIsOpen] = useState(false);
+    const [location, setLocation] = useState('');
+
 
     const toggle = () => {
         let newIsOpen = !isOpen;
@@ -67,7 +75,10 @@ const Sitebar = (props) => { //2
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                     </NavDropdown> */}
-
+                    
+            {/* ***************** TRYING TO GET AN INPUT FIELD ON MY NAVBAR ******************************** */}
+                    <Label htmlFor="location">Location</Label>
+                    <Input onChange={(e) => setLocation(e.target.value)} name="location" value={location}/>
 
                     <UncontrolledDropdown nav inNavbar>
                         <DropdownToggle nav caret>

@@ -1,0 +1,8 @@
+// this is necessary if using react-router-dom
+{
+    "root": "build/",
+    "clean_urls": false,
+    "routes": {
+        "/**": "index.html"
+    }
+}

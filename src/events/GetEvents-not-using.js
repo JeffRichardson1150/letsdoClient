@@ -2,68 +2,10 @@ import React, { useState, useEffect } from "react";
 import {Table, Button} from 'reactstrap';
 
 
-// let _oArgs = {
-//   app_key:"tQrWMD6FT4Thf7D4",
-//   category: "music",
-//   q: "Music",
-//   // where: "New York City Metro Area",
-//   where: "Indianapolis",
-//   page_size: 25,
-//   image_sizes: "large,medium",
-//   sort_order: "popularity",
-//   within: 5
-// };
-
 const GetEvents = (props) => {
+    console.log("******************** You're in GetEvents")
+    console.log("******************   props = ", props)
 
-// const [events, setevents] = useState([]);
-// const [EVDB, setEVDB] = useState(undefined);
-
-// useEffect(() => {
-//   setEVDB(window.EVDB)
-
-//   fetchEvents()
-
-//   // const script = document.createElement("script");
-
-//   // script.src = "http://api.eventful.com/js/api"
-//   // script.async = true;
-
-//   // document.body.appendChild(script);
-//   // console.log(EVDB)
-
-//   // fetchEvents()
-//   // return () => {
-//   //   document.body.removeChild(script);
-//   // }
-// })
-
-
-// const fetchEvents = () => {
-//   // Builds a url based on your query, and saves the result in a state variable
-//   // let url = `${baseURL}?api-key=${key}&page=${pageNumber}&q=${search}`;
-//   // url = startDate ? url + `&begin_date=${startDate}` : url;
-//   // url = endDate ? url + `&end_date=${endDate}` : url;
-
-//   // let url = "https://cors-anywhere.herokuapp.com/http://eventful.com/json/events/search?app_key=tQrWMD6FT4Thf7D4&location=Indianapolis&date=2020-03-11&category=music";
-
-
-//   // fetch(url)
-//   //   .then(res => res.json())
-//   //   .then(data => {
-//   //     console.log(data)
-//   //     setevents(data)
-//   //   })
-//   //   .catch(err => console.log(err));
-
-//   if(EVDB) {
-//     EVDB.API.call("/events/search", _oArgs, function(oData) {
-//       console.log(oData)
-//     })
-//   } else {
-//     console.log("no api")
-//   }
-// }
 
 const deleteEvent = (event) => {
   console.log(event)
@@ -78,7 +20,7 @@ const deleteEvent = (event) => {
 }
 
 
-const eventMapper = () => {
+const eventMapper = (props) => {
   console.log(props.events);
   return props.events.map((event, index) => {
       return(
@@ -117,7 +59,7 @@ const eventMapper = () => {
             </tr>
         </thead>
         <tbody>
-            {eventMapper()}
+            {/* {eventMapper(props)} */}
         </tbody>
     </Table>
     </>

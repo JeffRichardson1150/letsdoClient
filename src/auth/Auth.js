@@ -8,7 +8,7 @@ https://getbootstrap.com/docs/4.0/layout/grid/ (Links to an external site.)
 2. We are creating a functional component. It has no state, and it will simply pull in the props that will be passed down eventually.  Currently, this component is basically going to hold our login and signup forms side by side.  We have stubbed them out as text, but we'll add them as components later.
 */
 const Auth = (props) => {  //2
-    console.log("********************** HELLO FROM AUTH.JS ***********************");
+    console.log("********************** HELLO FROM AUTH.JS ******* props = ", props);
     return(
         <Container className="auth-container">
             <Row>

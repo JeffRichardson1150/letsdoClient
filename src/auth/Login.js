@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';  //1
+import APIURL from '../helpers/environment.js'
+
 
 /*
 1. We import lots of bootstrap components, many of which are related to the bootstrap form.  If you're curious about bootstrap forms, please take a look here:
@@ -14,7 +16,8 @@ const Login = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log("******************* I'm in handleSubmit ********************************")
-        fetch("http://localhost:3000/api/login", {
+        // fetch("http://localhost:3000/api/login", {
+        fetch(`${APIURL}/api/login`, {
             method: 'POST',
             body: JSON.stringify({userName: username, password: password}),
             headers: new Headers({
@@ -38,14 +41,14 @@ const Login = (props) => {
                 <FormGroup>
                     <Label htmlFor="username">Username</Label>
                     <Input onChange={(e) => setUsername(e.target.value)} name="username" value={username}/>
-                    {console.log(username)}
+                    {/* {console.log(username)} */}
                     {/* <Input name="username" value={username}/>  3 */}
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password">Password</Label>
                     <Input onChange={(e) => setPassword(e.target.value)} name="password" value={password}/>
                     {/* <Input name="password" value={password}/>  3 */}
-                    {console.log(password)}
+                    {/* {console.log(password)} */}
 
                 </FormGroup>
                 <Button type="submit">Login</Button>

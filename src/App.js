@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Sitebar from './home/Navbar';
 import Auth from './auth/Auth';
-import DisplayContainers from './eventJar/DisplayContainers';
+import DisplayContainers from './home/DisplayContainers';
 
 /*
 1. We are using the useState hook to create a new state variable, sessionToken.  Because our sessionToken will change during the course of our app running (it will start empty, be given a value upon logging in, then emptied upon logout), we also use the second argument of useState, which allows us to change our sessionToken state variable.
@@ -48,7 +48,8 @@ function App() {
   const updateToken = (newToken) => {  //3
     console.log("********************** GONNA updateTOKEN IN APP.JS ***********************");
     localStorage.setItem('token', newToken);
-    setSessionToken(newToken);
+    console.log("just did localStorage.setItem")
+    setSessionToken(newToken); // ??????????????????????????????? WHY DOES THIS SEND ME BACK TO APP() ????? ??????????????????????????????????? 
     console.log("******************** sessionToken is :", sessionToken);  
   }
 

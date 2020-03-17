@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import { isCompositeComponentWithType } from 'react-dom/test-utils';
+import APIURL from '../helpers/environment.js'
+
 
 const JarEventCreate = (props) => {
     const [userName, setUserName] = useState('User Name');
@@ -20,7 +22,8 @@ const JarEventCreate = (props) => {
     const handleSubmit = (e) => {
         console.log("************* you're in handleSubmit ***************")
         e.preventDefault();
-        fetch('http://localhost:3000/api/jar/', {
+        // fetch('http://localhost:3000/api/jar/', {
+        fetch(`${APIURL}/api/jar/`, {   // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
         method: 'POST',
         body: JSON.stringify(
             {

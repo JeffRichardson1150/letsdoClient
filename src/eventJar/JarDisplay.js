@@ -10,6 +10,7 @@ using code from WorkoutTable.js
 */
 import React from 'react';
 import {Table, Button} from 'reactstrap';
+import APIURL from '../helpers/environment.js'
 
 const JarDisplay = (props) => {
 console.log(props)
@@ -29,7 +30,8 @@ console.log(props)
     // }
     const deleteJarEvent = (jarEvent) => {
         console.log(jarEvent)
-        fetch(`http://localhost:3000/api/jar/${jarEvent.id}`, {
+        // fetch(`http://localhost:3000/api/jar/${jarEvent.id}`, {
+        fetch(`${APIURL}/api/jar/${jarEvent.id}`, {   // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
