@@ -8,7 +8,7 @@ and feel free to take a look here for more information on the component bootstra
 import React, { useState } from 'react';
 // import { Form } from 'react-bootstrap-validation';
 
-import { isCompositeComponentWithType } from 'react-dom/test-utils';
+// import { isCompositeComponentWithType } from 'react-dom/test-utils';
 
 // import {NavDropdown, Form, FormControl} from "react-router-dom";
 // import Nav from 'react-bootstrap/Nav'
@@ -18,13 +18,14 @@ import { isCompositeComponentWithType } from 'react-dom/test-utils';
 //     NavDropdown, MenuItem, Tabs, ButtonToolbar, Button, Table, ButtonGroup, Row, Col, Grid, Panel, Form, FormGroup, FormControl} from 'react-bootstrap';
 
 import { //1
-    Form, FormGroup, Label, Input,
+    // Form, FormGroup, 
+    Label, Input,
     Collapse,
     Navbar,
     NavbarToggler,
     NavbarBrand,
     Nav,
-    NavLink,
+    // NavLink,
     NavItem,
     UncontrolledDropdown,
     DropdownToggle,

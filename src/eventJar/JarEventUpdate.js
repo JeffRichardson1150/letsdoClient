@@ -4,9 +4,10 @@ import { isCompositeComponentWithType } from 'react-dom/test-utils';
 import APIURL from '../helpers/environment.js'
 
 
-const JarEventCreate = (props) => {
+const JarEventUpdate = (props) => {
 
     console.log("You're in JarEventCreate")
+    const [id, setID] = useState(0);
     const [userName, setUserName] = useState('User Name');
     const [category, setCategory] = useState('Event Category');
     const [deleteBox, setDeleteBox] = useState(false);
@@ -26,10 +27,11 @@ const JarEventCreate = (props) => {
         console.log("************* you're in handleSubmit ***************")
         e.preventDefault();
         // fetch('http://localhost:3000/api/jar/', {
-        fetch(`${APIURL}/api/jar/`, {   // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
-        method: 'POST',
+        fetch(`${APIURL}/api/jar/:{id}`, {   // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
+        method: 'PUT',
         body: JSON.stringify(
             {
+                id: id,
                 userName: userName, 
                 category: category,
                 deleteBox: deleteBox,
@@ -65,9 +67,19 @@ const JarEventCreate = (props) => {
 
     return(
     <>
-    <h3>Create a Jar Event</h3>
+    <h3>Update a Jar Event</h3>
     <Form onSubmit={handleSubmit}>
         <Row>
+        <FormGroup>
+        <Col md="4">
+            <Label htmlFor="id"/>
+            {/* #############################  replace placeholder with CSS something to put a label in there that can be typed over ######################## */}
+            <Input name="id" value={id} onChange={(e) => setID(e.target.value)}/>
+            {/* <Input name="city" placeholder="Location" value={city} onChange={(e) => setCity(e.target.value)}/> */}
+            {/* <Input name="city" placeholder="Location" value={city} onChange={(e) => city = e.target.value}/> */}
+        </Col>
+        </FormGroup>
+       
         <FormGroup>
         <Col md="12">
             <Label htmlFor="city"/>
@@ -110,4 +122,4 @@ const JarEventCreate = (props) => {
     )
 }
 
-export default JarEventCreate;
+export default JarEventUpdate;
