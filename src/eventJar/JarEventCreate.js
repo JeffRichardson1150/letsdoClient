@@ -65,31 +65,33 @@ const JarEventCreate = (props) => {
 
     return(
     <>
+    <br />
     <h3>Create a Jar Event</h3>
     <Form onSubmit={handleSubmit}>
         <Row>
-        <FormGroup>
-        <Col md="12">
-            <Label htmlFor="city"/>
-            {/* #############################  replace placeholder with CSS something to put a label in there that can be typed over ######################## */}
-            <Input name="city" value={city} onChange={(e) => setCity(e.target.value)}/>
-            {/* <Input name="city" placeholder="Location" value={city} onChange={(e) => setCity(e.target.value)}/> */}
-            {/* <Input name="city" placeholder="Location" value={city} onChange={(e) => city = e.target.value}/> */}
-        </Col>
-        </FormGroup>
         <FormGroup>
         <Col md="12">
             <Label htmlFor="category"/>
             <Input type="select" name="category" value={category} onChange={(e) => setCategory(e.target.value)}>
             {/* <Input type="select" name="category" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)}> */}
             {/* <Input type="select" name="category" placeholder="Category" value={category} onChange={(e) => category = e.target.value}> */}
-                <option value="Music">Choose Category</option>
+                <option value="Header">Choose Category</option>
                 <option value="Music">Music</option>
                 <option value="Festival">Festival</option>
                 <option value="Comedy">Comedy</option>
             </Input>
         </Col>
         </FormGroup>
+        <FormGroup>
+        <Col md="12">
+            <Label htmlFor="title"/>
+            {/* #############################  replace placeholder with CSS something to put a label in there that can be typed over ######################## */}
+            <Input name="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
+            {/* <Input name="city" placeholder="Location" value={city} onChange={(e) => setCity(e.target.value)}/> */}
+            {/* <Input name="city" placeholder="Location" value={city} onChange={(e) => city = e.target.value}/> */}
+        </Col>
+        </FormGroup>
+
         <FormGroup>
         <Col md="12">
             <Label htmlFor="date"/>

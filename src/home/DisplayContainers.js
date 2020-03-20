@@ -20,34 +20,83 @@ let _oArgs = {
   };
   
   
+  
   let APIevents = []; // store the array of event objects retrieved from the eventful API (via EVDB.API.call)
   let APIobject = {};
   
-const DisplayContainers = (props) => {
- console.log("line 23 at the beginning of DisplayContainers")
-    //  ################################ for the Jar button on an event to store in the jar table ################################
+  
+  let eventsNotReadyToRender = true;
+
+  let eventArray = 
+    [
+        {
+            userName: "jeffrichardson573@gmail.com",
+            category: "Music",
+            deleteBox: false,
+            eventURL: "http://newyorkcity.eventful.com/events/daughtry-bergen-pac-/E0-001-071934718-7?utm_source=apis&utm_medium=apim&utm_campaign=apic",
+            eventImage: "http://d1marr3m5x4iac.cloudfront.net/images/medium/I0-001/040/825/885-9.jpeg_/daughtry-85.jpeg",
+            title: "Daughtry - Bergen PAC",
+            date: "2020-03-24",
+            day: "Tuesday",
+            time: "19:00:00",
+            venueName: "Bergen Performing Arts Center",
+            address: "30 North Van Brunt Street",
+            city: "Englewood",
+            state: "NJ",
+            zip: "07631"
+        },
+        {
+            userName: "jeffrichardson573@gmail.com",
+            category: "Music",
+            deleteBox: false,
+            eventURL: "http://newyorkcity.eventful.com/events/hella-mega-tourgreen-dayfall-out-boyweezer-pr-/E0-001-130407856-7?utm_source=apis&utm_medium=apim&utm_campaign=apic",
+            eventImage: "http://d1marr3m5x4iac.cloudfront.net/images/medium/I0-001/002/547/642-7.jpeg_/green-day-42.jpeg",
+            title: "Hella Mega Tour-Green Day/Fall Out Boy/Weezer Pres. by Harley-Davidson",
+            date: "2020-08-22",
+            day: "Monday",
+            time: "17:30:00",
+            venueName: "Citi Field",
+            address: "123-01 Roosevelt Ave",
+            city: "Queens Village",
+            state: "NY",
+            zip: "000000"
+        },
+        {
+            userName: "jeffrichardson573@gmail.com",
+            category: "Music",
+            deleteBox: false,
+            eventURL: "http://newyorkcity.eventful.com/events/kenny-chesney-florida-georgia-line-and-old-d-/E0-001-130867951-3?utm_source=apis&utm_medium=apim&utm_campaign=apic",
+            eventImage: "http://d1marr3m5x4iac.cloudfront.net/images/medium/I0-001/003/648/014-3.png_/kenny-chesney-14.png",
+            title: "Kenny Chesney with Florida Georgia Line and Old Dominion",
+            date: "2019-09-25",
+            day: "Friday",
+            time: "02:02:12",
+            venueName: "MetLife Stadium",
+            address: "1 Metlife Stadium",
+            city: "East Rutherford",
+            state: "NJ",
+            zip: "07073"
+    
+        }
+    ]
+  
+  const DisplayContainers = (props) => {
+      
+
     const [addEventToJar, setAddEventToJar] = useState(false) // state variable to pass between EventContainer and JarContainer to know when the Jar button was pushed on an event in the Event Container on the screen
-    console.log("line 26 after addEventToJar state variable")
-    
-    
-    const [initialize, setInitialize] = useState(true) // debugging - trying to control the useEffect to overcome the unpredictability of the events state variable
-    console.log("line 30 after initialize state variable")
+    // const [initialize, setInitialize] = useState(true) // debugging - trying to control the useEffect to overcome the unpredictability of the events state variable
     const [jarEvents, setJarEvents] = useState([]);  
-    console.log("line 32 after jarEvents state variable")
-    const [events, setEvents] = useState([]);  // Going to retrieve an array of event objects from eventful API
-    console.log("line 34 after events state variable")
-    // let APIevents = []; // store the array of event objects retrieved from the eventful API (via EVDB.API.call)
-    // let oEvents = [];
-    // const [EVDB, setEVDB] = useState(window.EVDB); // For the eventful API calls, pull EVDB from the Script tag in index.html
-    let EVDB = window.EVDB; // For the eventful API calls, pull EVDB from the Script tag in index.html
+    const [eventArray2, setEventArray2] = useState([]);  // Going to retrieve an array of event objects from eventful API
+    // const [events, setEvents] = useState([]);  // Going to retrieve an array of event objects from eventful API
+    const [EVDB, setEVDB] = useState(window.EVDB); // For the eventful API calls, pull EVDB from the Script tag in index.html
+
+    //  ################################ for the Jar button on an event to store in the jar table ################################
   
     console.log("****************** you're in DisplayContainers in DisplayContainers.js  ********")
 
     // ########## FUNCTION FETCH JAR EVENTS : GET EVENTS FROM THE JAR DATABASE TABLE AND DISPLAY IN A LIST ON CONSOLE 
     const fetchJarEvents = () => {
         console.log("************ execute a fetch using GET method & route = /api/jar.  pass the Token as Authorization*************************")
-        console.log("***************  props.token : ", props.token)
-        // fetch('http://localhost:3000/api/jar', {
         fetch(`${APIURL}/api/jar`, {  // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
             method: 'GET',
             headers: new Headers ({
@@ -55,13 +104,7 @@ const DisplayContainers = (props) => {
                 'Authorization': props.token
             })
         }).then((res) => {
-            /*
-            LEARNING MOMENT ***************
-            I was dead in the water because logData (the next .then) kept coming up "undefined" even though the fetch was successful
-            I had a block arrow function (had the {}) but I didn't have a "return" on the res.json(), so nothing got passed to the next .then
-            I changed to block to add a console.log.  If res.json() is the only command, I can use the short form without a "return"
-                    .then((res) => res.json();)
-            */
+            eventsNotReadyToRender = false;
             return res.json(); 
         })
         .then((logData) => setJarEvents(logData))
@@ -69,35 +112,27 @@ const DisplayContainers = (props) => {
     }
 
     // ########## FUNCTION FETCH EVENTS : GET EVENTS FROM EVENTFUL API AND DISPLAY IN A LIST ON CONSOLE 
+    const fetchEvents = async () => {  // trying async & await
     // const fetchEvents = async () => {  // trying async & await
-    // // const fetchEvents = async () => {  // trying async & await
-    //     console.log("You're in fetchEvents in DisplayContainers.js")
-    //     console.log(`Gonna check if EVDB is not undefined. EVDB = ${EVDB}`)
-    //     if (EVDB !== undefined) {
-    //         EVDB.API.call("/events/search", _oArgs, function (APIobject) {
-    //             console.log("*** APIobject : ", APIobject)
-    //             console.log("*** APIobject.events : ", APIobject.events)
-    //             console.log("*** APIobject.events.event : ", APIobject.events.event)
-    //         //   setEvents(events.push(APIobject.events))
-    //         //   APIevents.push(APIobject.events.event);  // gonna try to move this outside the 
-    //         //   console.log("oEvents = ", oEvents)
-    //           console.log("************* in fetchEvents...we just set APIevents to APIobject.events.event   APIevents = ", APIevents)
-    //         }
-    //         )  
-    //             // setEvents(events.push(APIobject.events.event))
-    //       } else {
-    //         console.log("no api")
-    //       }  
-    //     }  
+        console.log("You're in fetchEvents in DisplayContainers.js")
+        console.log(`Gonna check if EVDB is not undefined. EVDB = ${EVDB}`)
+        if (EVDB !== undefined) {
+            EVDB.API.call("/events/search", _oArgs, function (APIobject) {
+              setEventArray2(eventArray2.push(APIobject.events.event))
+            })  
+                // setEvents(events.push(APIobject.events.event))
+          } else {
+            console.log("no api")
+          }  
+        }  
       
       useEffect(() => {
           console.log(`USE EFFECT TRIGGERED`)
         fetchJarEvents()
-        // fetchEvents()
+        fetchEvents()
     }, [])
       
         //  ################################ for the Jar button on an event to store in the jar table ################################
-        //** This didn't work */
         useEffect(() => {
             console.log ("***** You're in DisplayContainers. addEventToJar, the Jar button on the Event Container. changed to: ", addEventToJar)
             // create jar event
@@ -105,30 +140,7 @@ const DisplayContainers = (props) => {
             // ??? EventContainer(props.addEventToJar);
         }, [addEventToJar]);
     
-    // render() {
-    //     if (APIevents === undefined) {
-    //         return (
-    //         <div>
-
-    //         </div>)
-    //     }
     
-    // console.log("check in APIevents === undefined || APIevents === []")
-    // if (APIevents === undefined || APIevents === []) {
-    //     console.log("yes...APIevents = undefined")
-    //     return (
-    //     <div>
-
-    //     </div>)} else {
-    //         console.log("no...APIevents not = undefined")
-
-    // junk pulled from trying to debug return
-                        //     {/* <EventContainer />; */}
-                        // {/* {console.log(`this is the APIevents variable`, APIevents)} */}
-                        // {/* { s !== [] ? <EventContainer events={events} fetchEvents={fetchEvents}/> : <p>No Fetch</p>} */}
-                        // {/* <EventContainer events={oEvents} fetchEvents={fetchEvents}/> */}
-                        // {/* <EventContainer events={APIevents} token={props.token} setAddEventToJar={setAddEventToJar} /> */}
-
     return (
             <Container>
                 <Row>
@@ -139,17 +151,15 @@ const DisplayContainers = (props) => {
                         <JarContainer jarEvents={jarEvents} fetchJarEvents={fetchJarEvents} token={props.token} addEventToJar={addEventToJar} />
                     </Col>
                     <Col md="6">
-                    <script type="text/javascript">
-
-                    EVDB.API.call("/events/search", _oArgs, function (APIobject) {
-                        <EventContainer APIobject={APIobject} token={props.token} setAddEventToJar={setAddEventToJar} />
-                    }
-                    </script>
-                        {console.log("Returned from EventContainer")}
+                           {/* <EventContainer APIobject={APIobject} token={props.token} setAddEventToJar={setAddEventToJar} /> */}
+                           {console.log("eventArray = ", eventArray)}
+                           <EventContainer eventArray={eventArray} token={props.token} setAddEventToJar={setAddEventToJar} />
+                            {console.log("In the return() of DisplayContainers. Returned from EventContainer")}
                     </Col>
                 </Row>
                     <Col md="12">
                         <JarEventCreate fetchJarEvents={fetchJarEvents} token={props.token} />
+                        {/* <JarEventCreate /> */}
                     </Col>
                     {/* <Col md="9">
 
@@ -157,7 +167,7 @@ const DisplayContainers = (props) => {
 
                 <Row>
                 <Col md="12">
-                        <JarEventUpdate fetchJarEvents={fetchJarEvents} token={props.token} />
+                        <JarEventUpdate eventArray={eventArray} fetchJarEvents={fetchJarEvents} token={props.token} />
                     </Col>
                     {/* <Col md="9"> 
                         </Col>*/}
@@ -165,8 +175,6 @@ const DisplayContainers = (props) => {
                 </Row>
             </Container>
         )
-            
-    // }
 }
 
     export default DisplayContainers;

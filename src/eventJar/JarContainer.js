@@ -55,7 +55,7 @@ console.log(props)
                     <td>{jarEvent.title}</td>
                     <td>{jarEvent.date}</td>
                     <td>
-                        <Button color="warning">Update</Button>
+                        {/* <Button color="warning">Update</Button> */}
                         <Button color="danger" onClick={() => {deleteJarEvent(jarEvent)}}>Delete</Button>
                     </td>
                 </tr>
