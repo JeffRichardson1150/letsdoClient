@@ -47,11 +47,11 @@ const EventContainer = (props) => {
             return(
                 <tr key={index}>
                     <th scope="row">{event.id}</th>
-                    <td>{event.category}</td>
+                    <td >{event.category}</td>
                     <td>{event.title}</td>
                     <td>{event.date}</td>
                     <td>
-                        <Button color="warning" onClick={() => putInJar(event)}>Jar</Button>
+                        <Button color="warning" size = "sm" onClick={() => putInJar(event)}>Jar</Button>
                         {/* <Button color="warning" onClick={() => {putInJar(event)}}>Jar</Button> */}
                         {/* <Button color="warning" onClick={() => function()}}>Jar</Button> */}
                         {/* <Button color="warning" onClick={JarEventCreate}>Jar</Button> */}

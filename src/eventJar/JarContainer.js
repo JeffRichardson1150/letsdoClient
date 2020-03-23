@@ -55,8 +55,8 @@ console.log(props)
                     <td>{jarEvent.title}</td>
                     <td>{jarEvent.date}</td>
                     <td>
-                        {/* <Button color="warning">Update</Button> */}
-                        <Button color="danger" onClick={() => {deleteJarEvent(jarEvent)}}>Delete</Button>
+                        <Button color="warning" size="sm">Update</Button>
+                        <Button color="danger" size = "sm" onClick={() => {deleteJarEvent(jarEvent)}}>Delete</Button>
                     </td>
                 </tr>
             )
@@ -82,6 +82,8 @@ console.log(props)
                     <th>Category</th>
                     <th>Event</th>
                     <th>Date</th>
+                    <Button color="success" size="sm">Add</Button>
+
                 </tr>
             </thead>
             <tbody>

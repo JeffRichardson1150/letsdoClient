@@ -79,7 +79,7 @@ const Sitebar = (props) => { //2
                     
             {/* ***************** TRYING TO GET AN INPUT FIELD ON MY NAVBAR ******************************** */}
                     <Label htmlFor="location">Location</Label>
-                    <Input onChange={(e) => setLocation(e.target.value)} name="location" value={location}/>
+                    <Input size="sm" onChange={(e) => setLocation(e.target.value)} name="location" value={location}/>
 
                     <UncontrolledDropdown nav inNavbar>
                         <DropdownToggle nav caret>

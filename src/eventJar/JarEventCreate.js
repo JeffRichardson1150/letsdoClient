@@ -72,21 +72,28 @@ const JarEventCreate = (props) => {
         <FormGroup>
         <Col md="12">
             <Label htmlFor="category"/>
-            <Input type="select" name="category" value={category} onChange={(e) => setCategory(e.target.value)}>
+
+            {/* <input type="select" name="category" value={category} onChange={(e) => setCategory(e.target.value)}/>
+                <option value="Header">Choose Category</option>
+                <option value="Music">Music</option>
+                <option value="Festival">Festival</option>
+                <option value="Comedy">Comedy</option> */}
+           
+            <Input type="select" size="sm" name="category" value={category} onChange={(e) => setCategory(e.target.value)}>
             {/* <Input type="select" name="category" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)}> */}
-            {/* <Input type="select" name="category" placeholder="Category" value={category} onChange={(e) => category = e.target.value}> */}
                 <option value="Header">Choose Category</option>
                 <option value="Music">Music</option>
                 <option value="Festival">Festival</option>
                 <option value="Comedy">Comedy</option>
             </Input>
+
         </Col>
         </FormGroup>
         <FormGroup>
         <Col md="12">
             <Label htmlFor="title"/>
             {/* #############################  replace placeholder with CSS something to put a label in there that can be typed over ######################## */}
-            <Input name="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
+            <Input name="title" size="sm" value={title} onChange={(e) => setTitle(e.target.value)}/>
             {/* <Input name="city" placeholder="Location" value={city} onChange={(e) => setCity(e.target.value)}/> */}
             {/* <Input name="city" placeholder="Location" value={city} onChange={(e) => city = e.target.value}/> */}
         </Col>
@@ -95,14 +102,14 @@ const JarEventCreate = (props) => {
         <FormGroup>
         <Col md="12">
             <Label htmlFor="date"/>
-            <Input name="date" value={date} onChange={(e) => setDate(e.target.value)}/>
+            <Input name="date" size="sm" type="text" value={date} onChange={(e) => setDate(e.target.value)}/>
             {/* <Input name="date" placeholder="Event Date" value={date} onChange={(e) => setDate(e.target.value)}/> */}
             {/* <Input name="date" placeholder="Date" value={date} onChange={(e) => date = e.target.value}/> */}
             </Col>
         </FormGroup>
         <FormGroup>
-        <Col sm="2">
-            <Button type="submit">Add</Button>
+        <Col sm="8">
+            <Button type="submit" size="sm">Add</Button>
             </Col>
         </FormGroup>
         </Row>
