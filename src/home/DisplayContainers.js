@@ -153,7 +153,7 @@ let _oArgs = {
                     <Col md="6">
                            {/* <EventContainer APIobject={APIobject} token={props.token} setAddEventToJar={setAddEventToJar} /> */}
                            {console.log("eventArray = ", eventArray)}
-                           <EventContainer eventArray={eventArray} token={props.token} setAddEventToJar={setAddEventToJar} />
+                        <EventContainer eventArray={eventArray} token={props.token} setAddEventToJar={setAddEventToJar} />
                             {console.log("In the return() of DisplayContainers. Returned from EventContainer")}
                     </Col>
                 </Row>
