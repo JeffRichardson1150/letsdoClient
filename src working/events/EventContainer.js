@@ -4,12 +4,9 @@ import APIURL from '../helpers/environment.js'
 import JarEventCreate from '../eventJar/JarEventCreate'
 import CopyEventToJar from './CopyEventToJar'
 
-import EventDetail from './EventDetail'
-
 
 // const EventContainer = () => {
 const EventContainer = (props) => {
-    console.log("events array: ", props.eventArray)
     // console.log("props = ", props)
     // console.log("props.APIobject = ", props.APIobject)
     // console.log("props.APIobject.events = ", props.APIobject.events)
@@ -48,23 +45,20 @@ const EventContainer = (props) => {
         console.log("in eventMapper. eventArray = ", eventArray)
         return eventArray.map((event, index) => {
             return(
-                
                 <tr key={index}>
-                <th scope="row">
-
-                <EventDetail event={event} setEventAddedToJar={props.setEventAddedToJar} token={props.token} />
-                    </th>
-                {/* </tr>
-                <tr key={index}> */}
-                {/* <th scope="row">{event.id}</th>
-                       
+                    <th scope="row">{event.id}</th>
                     <td >{event.category}</td>
                     <td>{event.title}</td>
-                    <td>{event.date}</td> */}
-                
-                    {/* <td>
+                    <td>{event.date}</td>
+                    <td>
                         <Button color="warning" size = "sm" onClick={() => putInJar(event)}>Jar</Button>
-                    </td> */}
+                        {/* <Button color="warning" onClick={() => {putInJar(event)}}>Jar</Button> */}
+                        {/* <Button color="warning" onClick={() => function()}}>Jar</Button> */}
+                        {/* <Button color="warning" onClick={JarEventCreate}>Jar</Button> */}
+                        {/* <Button color="warning" onClick={<JarEventCreate events={props.event} />}>Jar</Button> */}
+                        {/* <Button color="warning" onClick={JarEventCreate}>Jar</Button> */}
+                        {/* <Button color="danger" onClick={() => {deleteEvent(event)}}>Delete</Button> */}
+                    </td>
                 </tr>
             )
         })
@@ -78,8 +72,15 @@ const EventContainer = (props) => {
         <>
         <h3>Events</h3>
         <hr/>
-        {/* <Table striped> */}
-        <Table>
+        <Table striped>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Category</th>
+                    <th>Event</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
             <tbody>
                 {/* {eventMapper('junk')}  */}
                 {/* {console.log("props.events.event = ", props.event)}

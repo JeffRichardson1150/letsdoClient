@@ -8,28 +8,14 @@ using code from WorkoutTable.js
 
 4.  We include two buttons that are non-functional right now.  That's alright.  Having the UI present moves the needle a little closer to the goal!
 */
-
 import React, {useState, useEffect} from 'react';
 import {Table, Button} from 'reactstrap';
-
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
-
 import APIURL from '../helpers/environment.js'
-import JarEventDetail from './JarEventDetail'
-
-const token = localStorage.getItem('token');
-
-
 
 const JarContainer = (props) => {
-
         //  ################################ for the Jar button on an event to store in the jar table ################################
     console.log("addEventToJar state variable = ", props.addEventToJar)
-    console.log(props)
+console.log(props)
     // Need to convert this code to suit my jars vs workouts
     // workouts is a state variable / my state variable is jarEvent...it's set to logData in fetchWorkouts (fetchJarEvents in JarFetch.js) 
     // after an /api/log call
@@ -63,18 +49,19 @@ const JarContainer = (props) => {
         console.log("You're in jarEventMapper. props = ", props)
         return props.jarEvents.map((jarEvent, index) => {
             return(
-                
                 <tr key={index}>
-                <th scope="row">
-
-                    <JarEventDetail jarEvent={jarEvent} deleteJarEvent={deleteJarEvent} token={props.token} />
-                    </th>
+                    <th scope="row">{jarEvent.id}</th>
+                    <td>{jarEvent.category}</td>
+                    <td>{jarEvent.title}</td>
+                    <td>{jarEvent.date}</td>
+                    <td>
+                        <Button color="warning" size="sm">Update</Button>
+                        <Button color="danger" size = "sm" onClick={() => {deleteJarEvent(jarEvent)}}>Delete</Button>
+                    </td>
                 </tr>
             )
-
         })
-
-        }
+    }
 
     //  ################################ for the Jar button on an event to store in the jar table ################################
     useEffect(() => {
@@ -87,9 +74,18 @@ const JarContainer = (props) => {
     return(
         <>
         <h3>My Jar</h3>
-        <Button color="success" size="sm">Add</Button>
         <hr/>
-        <Table >
+        <Table striped>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Category</th>
+                    <th>Event</th>
+                    <th>Date</th>
+                    <Button color="success" size="sm">Add</Button>
+
+                </tr>
+            </thead>
             <tbody>
                 {jarEventMapper()}
             </tbody>

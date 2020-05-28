@@ -29,15 +29,15 @@ import DisplayContainers from './home/DisplayContainers';
             for (index=1; index<=10, index++) { console.log(localStorage.key(index)) }
 */
 function App() {
-  // console.log("********************** HELLO FROM APP.JS ***********************");
+  console.log("********************** HELLO FROM APP.JS ***********************");
   const [sessionToken, setSessionToken] = useState(''); //1
 
   useEffect(() => {  //2
-    // console.log("***************  in the useEffect in App.js - if localStorage has a session token, put it in sessionToken state variable***********")
+    console.log("***************  in the useEffect in App.js - if localStorage has a session token, put it in sessionToken state variable***********")
     if (localStorage.getItem('token')){
-      // console.log(`******************** localStorage.getItem('token'): ${localStorage.getItem('token')} *****************************************`)
+      console.log(`******************** localStorage.getItem('token'): ${localStorage.getItem('token')} *****************************************`)
       setSessionToken(localStorage.getItem('token'));
-      // console.log(`***************************did we put the token in sessionToken? ${sessionToken} ******************************************`)
+      console.log(`***************************did we put the token in sessionToken? ${sessionToken} ******************************************`)
     }
   }, [])
    
@@ -46,11 +46,11 @@ function App() {
     In signup, after posting a new username/(encrypted)password pair into the database, updateToken is called as a props Method (props.updateToken) passing the encrypted password ('token') as it .
   */
   const updateToken = (newToken) => {  //3
-    // console.log("********************** GONNA updateTOKEN IN APP.JS ***********************");
+    console.log("********************** GONNA updateTOKEN IN APP.JS ***********************");
     localStorage.setItem('token', newToken);
-    // console.log("just did localStorage.setItem")
+    console.log("just did localStorage.setItem")
     setSessionToken(newToken); // ??????????????????????????????? WHY DOES THIS SEND ME BACK TO APP() ????? ??????????????????????????????????? 
-    // console.log("******************** sessionToken is :", sessionToken);  
+    console.log("******************** sessionToken is :", sessionToken);  
   }
 
 
@@ -60,7 +60,7 @@ function App() {
   whether or not sessionToken exists in their local storage.
   */
   const clearToken = () => {
-    // console.log("************** in clearToken.  clear local Storage  &  setSessionToken to '' *****************")
+    console.log("************** in clearToken.  clear local Storage  &  setSessionToken to '' *****************")
     localStorage.clear();
     setSessionToken('');
   }
@@ -69,10 +69,9 @@ function App() {
     This is an interesting function, and definitely worth our time to investigate.  The entire function returns the result of our ternary expression, which checks to see if our sessionToken state variable matches the token property in localStorage.  If the two match (which can only happen when they store the same sessionToken string), then the function fires off the WorkoutIndex component.  Otherwise, this function will return our Auth component so the user can attempt to grab a sessionToken through our server.  The reason the sessionToken variable can only match the token property in local storage when they both store a token is due to how we've built the clearToken function in App.js.  When there is no session token, the sessionToken state variable is reset to '', an empty string, while the localStorage is cleared, erasing our token property.  When an object has no property, it's undefined.  Therefore, the empty string stored by our sessionToken state variable is strictly unequal to the undefined token property in localStorage, and our Auth component is fired.
   */
   const protectedViews = () => {
-    // console.log("************ in protectedViews - if sessionToken === token in localStorge, call DisplayContainers to get jar contents. Else call Auth to login *******")
-    // console.log("sessionToken: ", sessionToken);
+    console.log("************ in protectedViews - if sessionToken === token in localStorge, call DisplayContainers to get jar contents. Else call Auth to login *******")
+    console.log("sessionToken: ", sessionToken);
     console.log("localStorage token: ", localStorage.getItem('token'));
-    console.log(`in App.js, return of protectedViews. sessionToken: ${sessionToken}`)
     return (
       sessionToken === localStorage.getItem('token') ? 
       <DisplayContainers token={sessionToken}/> : 
@@ -92,23 +91,3 @@ function App() {
 }
 
 export default App;
-
-/*
-
-App.js : 
-=====================
-<Sitebar clickLogout={clearToken} />
-<DisplayContainers token={sessionToken}/>
-
-DisplayContainers.js :
-===========================
-use the geolocate thing to find where user is
-pull events from Eventful API based on that location, populate Events Container
-
-if sessionToken === localStorage.getItem('token'), THEN
-display contents of JAR in JarContainer  ELSE
-JarContainer is empty
-
-
-
-*/

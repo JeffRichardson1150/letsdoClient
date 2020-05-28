@@ -19,13 +19,40 @@ import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
 import APIURL from '../helpers/environment.js'
-import JarEventDetail from './JarEventDetail'
 
 const token = localStorage.getItem('token');
 
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    margin: 'auto',
+    maxWidth: 500,
+  },
+  image: {
+    width: 128,
+    height: 128,
+  },
+  img: {
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
+  },
+  small_text: {
+    fontSize: '.7em',
+  }
+}));
+
+
+
+
 
 const JarContainer = (props) => {
+    const classes = useStyles();  
 
         //  ################################ for the Jar button on an event to store in the jar table ################################
     console.log("addEventToJar state variable = ", props.addEventToJar)
@@ -62,16 +89,46 @@ const JarContainer = (props) => {
     const jarEventMapper = () => {
         console.log("You're in jarEventMapper. props = ", props)
         return props.jarEvents.map((jarEvent, index) => {
-            return(
-                
-                <tr key={index}>
-                <th scope="row">
 
-                    <JarEventDetail jarEvent={jarEvent} deleteJarEvent={deleteJarEvent} token={props.token} />
-                    </th>
-                </tr>
-            )
-
+        return (
+            <div className={classes.root}>
+              <Paper className={classes.paper}>
+                <Grid container spacing={2}>
+                  <Grid item>
+                    <ButtonBase className={classes.image} href={jarEvent.eventURL} target=
+                    "_blank">
+                      <img className={classes.img} alt="complex" src={jarEvent.eventImageURL} />
+                    </ButtonBase>
+                  </Grid>
+                  <Grid item xs={12} sm container>
+                    <Grid item xs container direction="column" spacing={2}>
+                      <Grid item xs>
+                        <Typography gutterBottom variant="subtitle2">
+                        <a href={jarEvent.eventURL} target="_blank">{jarEvent.eventTitle}</a>
+                        </Typography>
+                        <Typography variant="subtitle2" gutterBottom>
+                          {jarEvent.eventDateTime}
+                        </Typography>
+                        <Typography className={classes.small_text} color="textSecondary">
+                          {jarEvent.venueName}
+                        </Typography>
+                        <Typography className={classes.small_text} color="textSecondary">
+                          {jarEvent.venueAddress}
+                        </Typography>
+                        <Typography className={classes.small_text} color="textSecondary">
+                          {jarEvent.venueCity}, {jarEvent.venueState} {jarEvent.venueZip}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid item direction="column">
+                        <Button color="warning" size="sm">Update</Button>
+                        <Button color="danger" size = "sm" onClick={() => {deleteJarEvent(jarEvent)}}>Delete</Button>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </div>
+          );
         })
 
         }
@@ -87,7 +144,6 @@ const JarContainer = (props) => {
     return(
         <>
         <h3>My Jar</h3>
-        <Button color="success" size="sm">Add</Button>
         <hr/>
         <Table >
             <tbody>
