@@ -32,7 +32,7 @@ let _oArgs = {
   
   const DisplayContainers = (props) => {
 
-    const [addEventToJar, setAddEventToJar] = useState(false) // state variable to pass between EventContainer and JarContainer to know when the Jar button was pushed on an event in the Event Container on the screen
+    const [eventAddedToJar, setEventAddedToJar] = useState(false) // state variable to pass between EventContainer and JarContainer to know when the Jar button was pushed on an event in the Event Container on the screen
     // const [initialize, setInitialize] = useState(true) // debugging - trying to control the useEffect to overcome the unpredictability of the events state variable
     const [jarEvents, setJarEvents] = useState([]);  
     const [eventArray, setEventArray] = useState([]);  // Going to retrieve an array of event objects from eventful API
@@ -46,7 +46,7 @@ let _oArgs = {
 
     // ########## FUNCTION FETCH JAR EVENTS : GET EVENTS FROM THE JAR DATABASE TABLE AND DISPLAY IN A LIST ON CONSOLE 
     const fetchJarEvents = () => {
-        console.log("************ execute a fetch using GET method & route = /api/jar.  pass the Token as Authorization*************************")
+        console.log("************ fetchJarEvents - execute a fetch using GET method & route = /api/jar.  pass the Token as Authorization*************************")
         fetch(`${APIURL}/api/jar`, {  // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
             method: 'GET',
             headers: new Headers ({
@@ -55,6 +55,7 @@ let _oArgs = {
             })
         }).then((res) => {
             // eventsNotReadyToRender = false;
+            setEventAddedToJar(false)
             return res.json(); 
         })
         .then((logData) => setJarEvents(logData))
@@ -87,11 +88,13 @@ let _oArgs = {
       
         //  ################################ for the Jar button on an event to store in the jar table ################################
         useEffect(() => {
-            console.log ("***** You're in DisplayContainers. addEventToJar, the Jar button on the Event Container. changed to: ", addEventToJar)
+            console.log ("***** You're in DisplayContainers. eventAddedToJar, the Jar button on the Event Container. changed to: ", eventAddedToJar)
+            fetchJarEvents()
+
             // create jar event
             // jarEventMapper();
             // ??? EventContainer(props.addEventToJar);
-        }, [addEventToJar]);
+        }, [eventAddedToJar]);
     
         
     return (
@@ -103,7 +106,7 @@ let _oArgs = {
                         <JarEventCreate fetchJarEvents={fetchJarEvents} token={props.token} />
                     </Col> */}
                     <Col md={6}>
-                        <JarContainer jarEvents={jarEvents} fetchJarEvents={fetchJarEvents} token={props.token} addEventToJar={addEventToJar} />
+                        <JarContainer jarEvents={jarEvents} fetchJarEvents={fetchJarEvents} token={props.token} setEventAddedToJar={setEventAddedToJar} />
                     </Col>
 
                     <Col md={6}>
@@ -116,7 +119,7 @@ let _oArgs = {
                             <div>
                             {/* <List> */}
                                 {console.log("eventArray = ", eventArray)}
-                                <EventContainer eventArray={eventArray} fetchJarEvents={fetchJarEvents} token={props.token} setAddEventToJar={setAddEventToJar} />
+                                <EventContainer eventArray={eventArray} setEventAddedToJar={setEventAddedToJar} fetchJarEvents={fetchJarEvents} token={props.token} />
                                 {/* <ComplexGrid /> */}
                                 {console.log("In the return() of DisplayContainers. Returned from EventContainer")}
                             {/* </List> */}

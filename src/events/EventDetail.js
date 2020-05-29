@@ -38,56 +38,61 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const putInJar = (eventForJar) => {
-  // console.log(eventForJar)
-  console.log("putInJar, event: ", eventForJar.event)
-  console.log(eventForJar.event.image.medium.url)
-  console.log("token : ", token)
-  fetch(`${APIURL}/api/jar/`, {   // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
-    method: 'POST',
-    body: JSON.stringify(
-        {
-            userName: 'userName', 
-            category: 'category',
-            eventID: eventForJar.event.id,
-            eventURL: eventForJar.event.url,
-            eventImageURL: eventForJar.event.image.medium.url,
-            eventTitle: eventForJar.event.title,
-            eventDateTime:  eventForJar.event.start_time,
-            venueName: eventForJar.event.venue_name,
-            venueAddress: eventForJar.event.venue_address,
-            venueCity: eventForJar.event.city_name,
-            venueState: eventForJar.event.region_abbr,
-            venueZip: eventForJar.event.postal_code
-
-        }
-    ),
-    headers: new Headers({
-        'Content-Type': 'application/json',
-        'Authorization': token
-    })
-}   ) .then((res) => {
-    console.log("****** POST was successful ******")
-    return res.json()
-})
-.then((logData) => {
-    console.log("************************* res.json successful - logData = ", logData);
-//     // setCategory('Event Category');
-//     // setCity('Event City');
-//     // setDate('Event Date');
-    // props.fetchJarEvents();
-    // props.setEventAddedToJar('true')
-})
-
-//   return(
-//   {/* <JarEventCreate event={event} /> */}
-//       )
-
-}
-
 export default function EventDetail(props) {
   const classes = useStyles();  
   let event = props.event;
+
+  const putInJar = (eventForJar) => {
+    // console.log(eventForJar)
+    console.log("putInJar, event: ", eventForJar.event)
+    console.log(eventForJar.event.image.medium.url)
+    console.log("token : ", token)
+    fetch(`${APIURL}/api/jar/`, {   // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
+      method: 'POST',
+      body: JSON.stringify(
+          {
+              userName: 'userName', 
+              category: 'category',
+              eventID: eventForJar.event.id,
+              eventURL: eventForJar.event.url,
+              eventImageURL: eventForJar.event.image.medium.url,
+              eventTitle: eventForJar.event.title,
+              eventDateTime:  eventForJar.event.start_time,
+              venueName: eventForJar.event.venue_name,
+              venueAddress: eventForJar.event.venue_address,
+              venueCity: eventForJar.event.city_name,
+              venueState: eventForJar.event.region_abbr,
+              venueZip: eventForJar.event.postal_code
+  
+          }
+      ),
+      headers: new Headers({
+          'Content-Type': 'application/json',
+          'Authorization': token
+      })
+  }   ) .then((res) => {
+      console.log("****** POST was successful ******")
+      props.setEventAddedToJar(true)
+      console.log("EventDetail - set EventAddedToJar")
+      return res.json()
+  
+  })
+  .then((logData) => {
+      console.log("************************* res.json successful - logData = ", logData);
+  //     // setCategory('Event Category');
+  //     // setCity('Event City');
+  //     // setDate('Event Date');
+      // props.fetchJarEvents();
+      // props.setEventAddedToJar('true')
+  })
+  
+  //   return(
+  //   {/* <JarEventCreate event={event} /> */}
+  //       )
+  
+  }
+  
+  
 
   return (
     <div className={classes.root}>
@@ -99,7 +104,7 @@ export default function EventDetail(props) {
               <img className={classes.img} alt="complex" src={event.image.medium.url} />
             </ButtonBase>
           </Grid>
-          <Grid item xs={12} sm container>
+          <Grid item xs={8} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle2">

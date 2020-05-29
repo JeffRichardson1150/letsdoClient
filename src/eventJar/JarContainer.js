@@ -10,7 +10,7 @@ using code from WorkoutTable.js
 */
 
 import React, {useState, useEffect} from 'react';
-import {Table, Button} from 'reactstrap';
+import {Table, Button, Container, Row, Col} from 'reactstrap';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -86,8 +86,18 @@ const JarContainer = (props) => {
 
     return(
         <>
-        <h3>My Jar</h3>
-        <Button color="success" size="sm">Add</Button>
+        <Container fluid>
+            <Row>
+                <Col md={10}>
+                    <h3>My Jar</h3>
+                </Col>
+                <Col md={2}>
+                    <Button color="success" size="sm">Add</Button>
+                
+                </Col>
+            </Row>
+
+        </Container>
         <hr/>
         <Table >
             <tbody>

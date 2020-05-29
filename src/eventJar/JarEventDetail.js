@@ -51,7 +51,7 @@ export default function JarEventDetail(props) {
               <img className={classes.img} alt="complex" src={jarEvent.eventImageURL} />
             </ButtonBase>
           </Grid>
-          <Grid item xs={12} sm container>
+          <Grid item xs={8} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle2">
@@ -71,7 +71,7 @@ export default function JarEventDetail(props) {
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item xs={1} container direction="column">
+            <Grid item xs={2} container direction="column">
                 <Button color="warning" size="sm">Update</Button>
                 <Button color="danger" size = "sm" onClick={() => {props.deleteJarEvent(jarEvent)}}>Delete</Button>
             </Grid>
