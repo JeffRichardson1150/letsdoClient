@@ -9,8 +9,11 @@ using code from WorkoutTable.js
 4.  We include two buttons that are non-functional right now.  That's alright.  Having the UI present moves the needle a little closer to the goal!
 */
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import React, {useState, useEffect} from 'react';
-import {Table, Button, Container, Row, Col} from 'reactstrap';
+// import {Table, Button, Container, Row, Col, Modal} from 'reactstrap';
+import {Table, Button, Container, Row, Col, Modal, Form} from 'react-bootstrap';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -26,6 +29,12 @@ const token = localStorage.getItem('token');
 
 
 const JarContainer = (props) => {
+
+    const [show, setShow] = useState(false);
+      
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
 
         //  ################################ for the Jar button on an event to store in the jar table ################################
     console.log("addEventToJar state variable = ", props.addEventToJar)
@@ -84,6 +93,29 @@ const JarContainer = (props) => {
         // ??? EventContainer(props.addEventToJar);
     }, [props.addEventToJar])
 
+    const AddEventForm = () => {
+        console.log("***** This is function AddEventForm ********")
+        return(
+            <div>
+                <Modal>
+                <Modal.Header closeButton>
+                    <Modal.Title>Modal title</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <p>Modal body text goes here.</p>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary">Close</Button>
+                    <Button variant="primary">Save changes</Button>
+                </Modal.Footer>
+                </Modal>
+            </div>
+        )
+    }
+
+
     return(
         <>
         <Container fluid>
@@ -92,18 +124,55 @@ const JarContainer = (props) => {
                     <h3>My Jar</h3>
                 </Col>
                 <Col md={2}>
-                    <Button color="success" size="sm">Add</Button>
+                    <Button color="success" size="sm" onClick={handleShow}>Add</Button>
                 
                 </Col>
             </Row>
 
         </Container>
-        <hr/>
+        {/* <hr/> */}
         <Table >
             <tbody>
                 {jarEventMapper()}
             </tbody>
         </Table>
+
+        <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>Add an Event</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                  
+                  Woohoo, you're reading this text in a modal!
+                <Form>
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control type="email" placeholder="Enter email" />
+                        <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                        </Form.Text>
+                    </Form.Group>
+
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" placeholder="Password" />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicCheckbox">
+                        <Form.Check type="checkbox" label="Check me out" />
+                    </Form.Group>
+                </Form>
+                  
+                  </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Cancel
+                </Button>
+                <Button variant="primary" onClick={handleClose}>
+                  Save Changes
+                </Button>
+              </Modal.Footer>
+            </Modal>
+
         </>
     )
 }

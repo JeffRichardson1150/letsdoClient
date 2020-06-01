@@ -3,6 +3,7 @@ import {Table, Button} from 'reactstrap';
 import APIURL from '../helpers/environment.js'
 import JarEventCreate from '../eventJar/JarEventCreate'
 import CopyEventToJar from './CopyEventToJar'
+import ScrollArea from 'react-scrollbar';
 
 import EventDetail from './EventDetail'
 
@@ -77,16 +78,17 @@ const EventContainer = (props) => {
     return(
         <>
         <h3>Events</h3>
-        <hr/>
-        {/* <Table striped> */}
-        <Table>
-            <tbody>
-                {/* {eventMapper('junk')}  */}
-                {/* {console.log("props.events.event = ", props.event)}
-                {(props.event !== undefined && props.event !== []) ? eventMapper(props.event) : doNothing() } */}
-                {eventMapper(props.eventArray)} 
-            </tbody>
-        </Table>
+        {/* <hr/> */}
+            <Table >
+                <tbody>
+                    {/* {eventMapper('junk')}  */}
+                    {/* {console.log("props.events.event = ", props.event)}
+                    {(props.event !== undefined && props.event !== []) ? eventMapper(props.event) : doNothing() } */}
+                    {eventMapper(props.eventArray)} 
+                </tbody>
+            </Table>
+        {/* </ScrollArea> */}
+
         </>
     )
 }

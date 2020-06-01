@@ -109,14 +109,14 @@ let _oArgs = {
                         <JarContainer jarEvents={jarEvents} fetchJarEvents={fetchJarEvents} token={props.token} setEventAddedToJar={setEventAddedToJar} />
                     </Col>
 
-                    <Col md={6}>
+                    <Col md={6} >
 
                         { stillFetching ? 
                             <div id="gettingData">
                                 <h4>Finding Events...</h4>
                                 <CircularProgress />
                             </div> : 
-                            <div>
+                            <div >
                             {/* <List> */}
                                 {console.log("eventArray = ", eventArray)}
                                 <EventContainer eventArray={eventArray} setEventAddedToJar={setEventAddedToJar} fetchJarEvents={fetchJarEvents} token={props.token} />

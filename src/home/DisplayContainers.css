@@ -6,3 +6,9 @@
 Col{
     margin: 5px;
 }
+
+.ColScroll {
+    overflow-y: scroll;
+  }
+  
+  

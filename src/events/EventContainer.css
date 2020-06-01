@@ -1,0 +1,7 @@
+.scroll {
+    overflow-y:auto;
+}
+
+Table {
+    height: 1200px;
+}

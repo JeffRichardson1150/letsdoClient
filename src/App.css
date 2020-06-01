@@ -7,6 +7,10 @@
   pointer-events: none;
 }
 
+.ColScroll {
+  overflow-y: scroll;
+}
+
 #jarContainerLabelAlign {
   text-align:center;
 }
