@@ -7,6 +7,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
+import putEventInJar from '../eventJar/PutEventInJar'
+
 // import JarEventCreate from '../eventJar/JarEventCreate'
 
 import APIURL from '../helpers/environment.js'

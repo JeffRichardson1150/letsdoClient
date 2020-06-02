@@ -16,6 +16,7 @@
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0",
     "react-scrollbar": "^0.5.6",
+    "react-time-picker": "^4.0.1",
     "reactstrap": "^8.4.1"
   },
   "scripts": {
