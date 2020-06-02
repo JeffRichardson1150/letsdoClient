@@ -11,9 +11,9 @@ using code from WorkoutTable.js
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 // import {Table, Button, Container, Row, Col, Modal} from 'reactstrap';
-import {Table, Button, Container, Row, Col, Modal, Form} from 'react-bootstrap';
+import { Table, Button, Container, Row, Col, Modal, Form, Control, Help } from 'react-bootstrap';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -24,19 +24,22 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import APIURL from '../helpers/environment.js'
 import JarEventDetail from './JarEventDetail'
 
-const token = localStorage.getItem('token');
+import JarEventDatePicker from './JarEventDatePicker'
+import JarEventAddForm from './JarEventAddForm'
 
+
+const token = localStorage.getItem('token');
 
 
 const JarContainer = (props) => {
 
+    // for the Modal (the form for a new event)....will display when show is true
     const [show, setShow] = useState(false);
-      
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
 
-        //  ################################ for the Jar button on an event to store in the jar table ################################
+    //  ################################ for the Jar button on an event to store in the jar table ################################
     console.log("addEventToJar state variable = ", props.addEventToJar)
     console.log(props)
     // Need to convert this code to suit my jars vs workouts
@@ -63,7 +66,7 @@ const JarContainer = (props) => {
                 'Authorization': props.token
             })
         })
-        .then(() => props.fetchJarEvents())
+            .then(() => props.fetchJarEvents())
     }
 
 
@@ -71,23 +74,23 @@ const JarContainer = (props) => {
     const jarEventMapper = () => {
         console.log("You're in jarEventMapper. props = ", props)
         return props.jarEvents.map((jarEvent, index) => {
-            return(
-                
-                <tr key={index}>
-                <th scope="row">
+            return (
 
-                    <JarEventDetail jarEvent={jarEvent} deleteJarEvent={deleteJarEvent} token={props.token} />
+                <tr key={index}>
+                    <th scope="row">
+
+                        <JarEventDetail jarEvent={jarEvent} deleteJarEvent={deleteJarEvent} token={props.token} />
                     </th>
                 </tr>
             )
 
         })
 
-        }
+    }
 
     //  ################################ for the Jar button on an event to store in the jar table ################################
     useEffect(() => {
-        console.log ("***** You're in the JarContainer useEffect watching addEventToJar, the Jar button on the Event Container. changed to: ", props.addEventToJar)
+        console.log("***** You're in the JarContainer useEffect watching addEventToJar, the Jar button on the Event Container. changed to: ", props.addEventToJar)
         // create jar event
         // jarEventMapper();
         // ??? EventContainer(props.addEventToJar);
@@ -95,62 +98,126 @@ const JarContainer = (props) => {
 
     const AddEventForm = () => {
         console.log("***** This is function AddEventForm ********")
-        return(
+        return (
             <div>
                 <Modal>
-                <Modal.Header closeButton>
-                    <Modal.Title>Modal title</Modal.Title>
-                </Modal.Header>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Modal title</Modal.Title>
+                    </Modal.Header>
 
-                <Modal.Body>
-                    <p>Modal body text goes here.</p>
-                </Modal.Body>
+                    <Modal.Body>
+                        <p>Modal body text goes here.</p>
+                    </Modal.Body>
 
-                <Modal.Footer>
-                    <Button variant="secondary">Close</Button>
-                    <Button variant="primary">Save changes</Button>
-                </Modal.Footer>
+                    <Modal.Footer>
+                        <Button variant="secondary">Close</Button>
+                        <Button variant="primary">Save changes</Button>
+                    </Modal.Footer>
                 </Modal>
             </div>
         )
     }
 
 
-    return(
+    return (
         <>
-        <Container fluid>
-            <Row>
-                <Col md={10}>
-                    <h3>My Jar</h3>
-                </Col>
-                <Col md={2}>
-                    <Button color="success" size="sm" onClick={handleShow}>Add</Button>
-                
-                </Col>
-            </Row>
+            <Container fluid>
+                <Row>
+                    <Col md={10}>
+                        <h3>My Jar</h3>
+                    </Col>
+                    <Col md={2}>
+                        <Button color="success" size="sm" onClick={handleShow}>Add</Button>
 
-        </Container>
-        {/* <hr/> */}
-        <Table >
-            <tbody>
-                {jarEventMapper()}
-            </tbody>
-        </Table>
+                    </Col>
+                </Row>
 
-        <Modal show={show} onHide={handleClose}>
-              <Modal.Header closeButton>
-                <Modal.Title>Add an Event</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                  
-                  Woohoo, you're reading this text in a modal!
+            </Container>
+            {/* <hr/> */}
+            <Table >
+                <tbody>
+                    {jarEventMapper()}
+                </tbody>
+            </Table>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Add an Event</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+
+
+                <Form>
+
+            <JarEventAddForm />
+
+
+        {/* Installed React date picker (npm install react-datepicker --save) */}
+                <Form.Group>
+                    <JarEventDatePicker />
+                </Form.Group>
+
+
+
+  <Form.Row>
+    <Form.Group as={Col} controlId="formGridEmail">
+      <Form.Label>Email</Form.Label>
+      <Form.Control type="email" placeholder="Enter email" />
+    </Form.Group>
+
+    <Form.Group as={Col} controlId="formGridPassword">
+      <Form.Label>Password</Form.Label>
+      <Form.Control type="password" placeholder="Password" />
+    </Form.Group>
+  </Form.Row>
+
+  <Form.Group controlId="formGridAddress1">
+    <Form.Label>Address</Form.Label>
+    <Form.Control placeholder="1234 Main St" />
+  </Form.Group>
+
+  <Form.Group controlId="formGridAddress2">
+    <Form.Label>Address 2</Form.Label>
+    <Form.Control placeholder="Apartment, studio, or floor" />
+  </Form.Group>
+
+  <Form.Row>
+    <Form.Group as={Col} controlId="formGridCity">
+      <Form.Label>City</Form.Label>
+      <Form.Control />
+    </Form.Group>
+
+    <Form.Group as={Col} controlId="formGridState">
+      <Form.Label>State</Form.Label>
+      <Form.Control as="select" value="Choose...">
+        <option>Choose...</option>
+        <option>...</option>
+      </Form.Control>
+    </Form.Group>
+
+    <Form.Group as={Col} controlId="formGridZip">
+      <Form.Label>Zip</Form.Label>
+      <Form.Control />
+    </Form.Group>
+  </Form.Row>
+
+  <Form.Group id="formGridCheckbox">
+    <Form.Check type="checkbox" label="Check me out" />
+  </Form.Group>
+
+</Form>
+
+
+
+
+                    Woohoo, you're reading this text in a modal!
                 <Form>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control type="email" placeholder="Enter email" />
                         <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                        </Form.Text>
+                            We'll never share your email with anyone else.
+                    </Form.Text>
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
@@ -161,16 +228,16 @@ const JarContainer = (props) => {
                         <Form.Check type="checkbox" label="Check me out" />
                     </Form.Group>
                 </Form>
-                  
-                  </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Cancel
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Cancel
                 </Button>
-                <Button variant="primary" onClick={handleClose}>
-                  Save Changes
+                    <Button variant="primary" onClick={handleClose}>
+                        Save Changes
                 </Button>
-              </Modal.Footer>
+                </Modal.Footer>
             </Modal>
 
         </>
