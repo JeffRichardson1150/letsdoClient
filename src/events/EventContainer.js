@@ -1,8 +1,13 @@
+/*
+#####   Called from DisplayContainters  ###
+    <EventContainer eventArray={eventArray} fetchJarEvents={fetchJarEvents} token={props.token} />
+*/
+
 import React, {useState, useEffect} from 'react';
 import {Table, Button} from 'reactstrap';
 import APIURL from '../helpers/environment.js'
 import JarEventCreate from '../eventJar/JarEventCreate'
-import CopyEventToJar from './CopyEventToJar'
+// import CopyEventToJar from './CopyEventToJar'
 import ScrollArea from 'react-scrollbar';
 
 import EventDetail from './EventDetail'
@@ -25,7 +30,7 @@ const EventContainer = (props) => {
                 'Authorization': props.token
             })
         })
-        .then(() => props.fetchEvents())
+        .then(() => props.fetchEvents())  // after deleting the event from the jar table, refresh the Jar Container on the screen
     }
 
         //  ################################ for the Jar button on an event to store in the jar table ################################
@@ -53,7 +58,8 @@ const EventContainer = (props) => {
                 <tr key={index}>
                 <th scope="row">
 
-                <EventDetail event={event} setEventAddedToJar={props.setEventAddedToJar} token={props.token} />
+                {/* <EventDetail event={event} setEventAddedToJar={props.setEventAddedToJar} fetchJarEvents={props.fetchJarEvents} token={props.token} /> */}
+                <EventDetail event={event} fetchJarEvents={props.fetchJarEvents} token={props.token} />
                     </th>
                 {/* </tr>
                 <tr key={index}> */}

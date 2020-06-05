@@ -1,4 +1,8 @@
 /*
+#####   Called from DisplayContainters  ###
+*/
+
+/*
 using code from WorkoutTable.js
 1.  We are mapping through our props.workouts array.  Remember that props.workouts is a reference to the workouts we pulled from our back-end.  These were objects containing individual workout data.  Our callback function, with params 'workout' and 'index' is defined according to the callback function of all .map methods: 'workout' will represent every workout object in our props.workouts array each time the map loop runs, while 'index' is the index number of that workout object in the workouts array.
 
@@ -24,11 +28,11 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import APIURL from '../helpers/environment.js'
 import JarEventDetail from './JarEventDetail'
 
-import JarEventDatePicker from './JarEventDatePicker'
+// import JarEventDatePicker from './JarEventDatePicker'
 import JarEventAddForm from './JarEventAddForm'
 
 
-const token = localStorage.getItem('token');
+// const token = localStorage.getItem('token');
 
 
 const JarContainer = (props) => {
@@ -40,8 +44,8 @@ const JarContainer = (props) => {
 
 
     //  ################################ for the Jar button on an event to store in the jar table ################################
-    console.log("addEventToJar state variable = ", props.addEventToJar)
-    console.log(props)
+    // console.log("addEventToJar state variable = ", props.addEventToJar)
+    console.log("JarContainer props: ", props)
     // Need to convert this code to suit my jars vs workouts
     // workouts is a state variable / my state variable is jarEvent...it's set to logData in fetchWorkouts (fetchJarEvents in JarFetch.js) 
     // after an /api/log call
@@ -79,7 +83,7 @@ const JarContainer = (props) => {
                 <tr key={index}>
                     <th scope="row">
 
-                        <JarEventDetail jarEvent={jarEvent} deleteJarEvent={deleteJarEvent} token={props.token} />
+                        <JarEventDetail jarEvent={jarEvent} deleteJarEvent={deleteJarEvent} token={props.token} userName={props.userName}/>
                     </th>
                 </tr>
             )
@@ -96,30 +100,80 @@ const JarContainer = (props) => {
         // ??? EventContainer(props.addEventToJar);
     }, [props.addEventToJar])
 
-    const AddEventForm = () => {
-        console.log("***** This is function AddEventForm ********")
-        return (
-            <div>
-                <Modal>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Modal title</Modal.Title>
-                    </Modal.Header>
+    // const AddEventForm = () => {
+    //     console.log("***** This is function AddEventForm ********")
+    //     return (
+    //         <div>
+    //             <Modal>
+    //                 <Modal.Header closeButton>
+    //                     <Modal.Title>Modal title</Modal.Title>
+    //                 </Modal.Header>
 
-                    <Modal.Body>
-                        <p>Modal body text goes here.</p>
-                    </Modal.Body>
+    //                 <Modal.Body>
+    //                     <p>Modal body text goes here.</p>
+    //                 </Modal.Body>
 
-                    <Modal.Footer>
-                        <Button variant="secondary">Close</Button>
-                        <Button variant="primary">Save changes</Button>
-                    </Modal.Footer>
-                </Modal>
-            </div>
-        )
-    }
+    //                 <Modal.Footer>
+    //                     <Button variant="secondary">Close</Button>
+    //                     <Button variant="primary">Save changes</Button>
+    //                 </Modal.Footer>
+    //             </Modal>
+    //         </div>
+    //     )
+    // }
 
     const handleSaveChanges = (event) => {
 
+        const putInJar = (eventForJar) => {
+            // console.log(eventForJar)
+            console.log("putInJar, event: ", eventForJar.event)
+            console.log(eventForJar.event.image.medium.url)
+            console.log("token : ", props.token)
+            fetch(`${APIURL}/api/jar/`, {   // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
+              method: 'POST',
+              body: JSON.stringify(
+                  {
+                      userName: 'userName', 
+                      category: 'category',
+                      eventID: eventForJar.event.id,
+                      eventURL: eventForJar.event.url,
+                      eventImageURL: eventForJar.event.image.medium.url,
+                      eventTitle: eventForJar.event.title,
+                      eventDateTime:  eventForJar.event.start_time,
+                      venueName: eventForJar.event.venue_name,
+                      venueAddress: eventForJar.event.venue_address,
+                      venueCity: eventForJar.event.city_name,
+                      venueState: eventForJar.event.region_abbr,
+                      venueZip: eventForJar.event.postal_code
+          
+                  }
+              ),
+              headers: new Headers({
+                  'Content-Type': 'application/json',
+                  'Authorization': props.token
+              })
+          }   ) .then((res) => {
+              console.log("****** POST was successful ******")
+              props.setEventAddedToJar(true)
+              console.log("EventDetail - set EventAddedToJar")
+              return res.json()
+          
+          })
+          .then((logData) => {
+              console.log("************************* res.json successful - logData = ", logData);
+          //     // setCategory('Event Category');
+          //     // setCity('Event City');
+          //     // setDate('Event Date');
+              // props.fetchJarEvents();
+              // props.setEventAddedToJar('true')
+          })
+          
+          //   return(
+          //   {/* <JarEventCreate event={event} /> */}
+          //       )
+          
+          }
+    
     }
 
 

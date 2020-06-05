@@ -1,3 +1,13 @@
+/*
+#####    Being Tested  ###
+
+#### in EventContainer  putInJar  ####
+<JarEventCreate event={event} />
+
+#####   Commented out in JarContainter at the end of putInJar (fetch POST to jar table  ) ###
+   <JarEventCreate event={event} />
+*/
+
 import React, {useState, useEffect} from 'react';
 import {Button, Form, FormGroup, Label, Input, Row, Col} from 'reactstrap';
 import { isCompositeComponentWithType } from 'react-dom/test-utils';

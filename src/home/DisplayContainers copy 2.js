@@ -1,10 +1,3 @@
-/*
-  #### called from App.js in protectedViews #####
-        <DisplayContainers token={sessionToken} userName={sessionUserName}/> : 
-
-*/
-
-
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import JarContainer from '../eventJar/JarContainer';
@@ -49,7 +42,6 @@ let _oArgs = {
     const [EVDB, setEVDB] = useState(window.EVDB); // For the eventful API calls, pull EVDB from the Script tag in index.html
 
     const userName = localStorage.getItem('userName');
-    // const userName = props.userName;
 
 
     //  ################################ for the Jar button on an event to store in the jar table ################################
@@ -59,10 +51,9 @@ let _oArgs = {
     // ########## FUNCTION FETCH JAR EVENTS : GET EVENTS FROM THE JAR DATABASE TABLE AND DISPLAY IN A LIST ON CONSOLE 
     const fetchJarEvents = () => {
         console.log("************ fetchJarEvents - execute a fetch using GET method & route = /api/jar.  pass the Token as Authorization*************************")
-        console.log("props.UserName : ", props.userName)
         console.log("userName : ", userName)
-        // fetch(`${APIURL}/api/jar/getAll/${props.userName}`, {  // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
-        fetch(`${APIURL}/api/jar/getAll/${userName}`, {  // calls localhost or heroku server based on APIURL which is set in helpers/###.js
+        fetch(`${APIURL}/api/jar/getAll/${userName}`, {  // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
+        // fetch(`${APIURL}/api/jar`, {  // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
             method: 'GET',
             headers: new Headers ({
                 'Content-Type': 'application/json',
@@ -114,34 +105,27 @@ let _oArgs = {
 
             <Container>
                 <Row className="justify-content-md-center">
-                    {/* <Col md="3">
-                        <JarEventCreate fetchJarEvents={fetchJarEvents} token={props.token} />
-                    </Col> */}
                     <Col md={6}>
-                        {/* <JarContainer jarEvents={jarEvents} fetchJarEvents={fetchJarEvents} token={props.token} setEventAddedToJar={setEventAddedToJar} /> */}
-                        <JarContainer jarEvents={jarEvents} fetchJarEvents={fetchJarEvents} token={props.token} userName={props.userName} />
+                        <JarContainer jarEvents={jarEvents} fetchJarEvents={fetchJarEvents} token={props.token}  />
                     </Col>
 
                     <Col md={6} >
-
-                        { stillFetching ? 
+                        <div></div>  {/* while testing */}
+                        {/* { stillFetching ? 
                             <div id="gettingData">
                                 <h4>Finding Events...</h4>
                                 <CircularProgress />
                             </div> : 
                             <div >
-                            {/* <List> */}
                                 {console.log("eventArray = ", eventArray)}
-                                {/* <EventContainer eventArray={eventArray} setEventAddedToJar={setEventAddedToJar} fetchJarEvents={fetchJarEvents} token={props.token} /> */}
-                                <EventContainer eventArray={eventArray} fetchJarEvents={fetchJarEvents} token={props.token} userName={props.userName}/>
-                                {/* <ComplexGrid /> */}
+                                <EventContainer eventArray={eventArray} fetchJarEvents={fetchJarEvents} token={props.token} />
                                 {console.log("In the return() of DisplayContainers. Returned from EventContainer")}
-                            {/* </List> */}
                             </div>
-                    }
+                    } */}
                     </Col>
 
                 </Row>
+                {/* These rows were the Event Create form and the Event Update form. Use those components as reference for adding this functionality */}
                 {/* <Row> */}
 
                     {/* <Col md="12">

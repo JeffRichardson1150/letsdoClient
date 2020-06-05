@@ -27,7 +27,7 @@ const Login = (props) => {
             (response) => response.json()
         ).then((data) => {
             console.log("**************************** calling updateToken with data.sessionToken: ", data.sessionToken)
-            props.updateToken(data.sessionToken)
+            props.updateToken(data.sessionToken, userName)
             console.log("****************************** back from updateToken with props = ", props)
         })
         // console.log(userName, password)

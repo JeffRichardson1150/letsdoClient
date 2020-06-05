@@ -1,5 +1,9 @@
 // Installed React DatePicker
 // npm install react-datepicker --save
+/*
+#####   Called from JarContainter in the Modal creation in the return() ###
+  <JarEventAddForm />
+*/
 
 import React, {useState, useEffect} from "react";
 import DatePicker from "react-datepicker";

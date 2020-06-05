@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Sitebar from './home/Navbar';
 import Auth from './auth/Auth';
 import DisplayContainers from './home/DisplayContainers';
-import AddEventForm from './eventJar/AddEventForm'
+// import AddEventForm from './eventJar/AddEventForm'
 
 
 /*
@@ -33,12 +33,14 @@ import AddEventForm from './eventJar/AddEventForm'
 function App() {
   // console.log("********************** HELLO FROM APP.JS ***********************");
   const [sessionToken, setSessionToken] = useState(''); //1
+  const [sessionUserName, setSessionUserName] = useState(''); //1
 
   useEffect(() => {  //2
     // console.log("***************  in the useEffect in App.js - if localStorage has a session token, put it in sessionToken state variable***********")
     if (localStorage.getItem('token')){
       // console.log(`******************** localStorage.getItem('token'): ${localStorage.getItem('token')} *****************************************`)
       setSessionToken(localStorage.getItem('token'));
+      setSessionUserName(localStorage.getItem('userName'));
       // console.log(`***************************did we put the token in sessionToken? ${sessionToken} ******************************************`)
     }
   }, [])
@@ -47,12 +49,19 @@ function App() {
     SIGNUP & LOGIN
     In signup, after posting a new username/(encrypted)password pair into the database, updateToken is called as a props Method (props.updateToken) passing the encrypted password ('token') as it .
   */
-  const updateToken = (newToken) => {  //3
+  const updateToken = (newToken, newUserName) => {  //3
     // console.log("********************** GONNA updateTOKEN IN APP.JS ***********************");
+    
     localStorage.setItem('token', newToken);
+    console.log("token was set in Local Storage to: ", newToken)
+    console.log("going to set userName in Local Storage to : ", newUserName)
+    localStorage.setItem('userName', newUserName);
+    console.log("just set userName in Local Storage")
     // console.log("just did localStorage.setItem")
     setSessionToken(newToken); // ??????????????????????????????? WHY DOES THIS SEND ME BACK TO APP() ????? ??????????????????????????????????? 
+    setSessionUserName(newUserName);
     // console.log("******************** sessionToken is :", sessionToken);  
+    console.log("sessionUserName: ", sessionUserName)
   }
 
 
@@ -65,6 +74,7 @@ function App() {
     // console.log("************** in clearToken.  clear local Storage  &  setSessionToken to '' *****************")
     localStorage.clear();
     setSessionToken('');
+    setSessionUserName('');
   }
 
   /*
@@ -75,11 +85,12 @@ function App() {
     // console.log("sessionToken: ", sessionToken);
     console.log("localStorage token: ", localStorage.getItem('token'));
     console.log(`in App.js, return of protectedViews. sessionToken: ${sessionToken}`)
+    console.log('sessionUserName: ', sessionUserName)
     return (
       sessionToken === localStorage.getItem('token') ? 
-      <DisplayContainers token={sessionToken}/> : 
+      <DisplayContainers token={sessionToken} userName={sessionUserName}/> : 
       // <AddEventForm /> :
-      <Auth updateToken={updateToken}/>
+      <Auth updateToken={updateToken} sessionToken={sessionToken} sessionUserName={sessionUserName} />
       )
   }
 

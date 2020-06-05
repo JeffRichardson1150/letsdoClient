@@ -1,3 +1,8 @@
+/*
+#####   Called from JarContainer in jarEventMapper  ###
+  <JarEventDetail jarEvent={jarEvent} deleteJarEvent={deleteJarEvent} token={props.token} />
+*/
+
 import React, {useState, useEffect} from 'react';
 import {Table, Button} from 'reactstrap';
 
@@ -9,7 +14,7 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 
 import APIURL from '../helpers/environment.js'
 
-const token = localStorage.getItem('token');
+// const token = localStorage.getItem('token');
 
 
 const useStyles = makeStyles((theme) => ({

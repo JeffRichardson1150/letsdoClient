@@ -17,6 +17,8 @@ const Signup = (props) => {
     console.log("********************** HELLO FROM SIGNUP.JS ***********************");
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
+    // let userName = '';
+    // let password = '';
     
     const handleSubmit = (event) => {
         event.preventDefault();  // prevent refresh of the screen from a Form submit
@@ -33,9 +35,10 @@ const Signup = (props) => {
             (response) => 
                 response.json()            
             ).then((data) => {
-                console.log("the next .then with props = ", props)
-                console.log("this is what the argument data is for this .then", data)
-                props.updateToken(data.sessionToken)
+                // console.log("the next .then with props = ", props)
+                console.log("Signup POST user. data: ", data)
+                props.updateToken(data.sessionToken, userName) // sessionToken gets created in usercontroller with JWT
+
             })
         }
 
@@ -47,19 +50,19 @@ const Signup = (props) => {
             <h1>Sign Up</h1>
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
-                    <Label htmlFor="userName">Username</Label>
+                    <Label htmlFor="userNameHTML">Username</Label>
                     <input 
                     type="text"
-                    id="userName"
+                    id="userNameID"
                     onChange={(e) => setUserName(e.target.value)} name="userName" value={userName}/>
                     {/* <Input onChange={(e) => e.target.value!=null ? setUsername(e.target.value) : <p>"user name is required"</p>} name="username" value={username}/> */}
                     {/* <Input name="username" value={username}/> 2 */}
                 </FormGroup>
                 <FormGroup>
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="passwordHTML">Password</Label>
                     <input 
                     type="password" 
-                    id="password" 
+                    id="passwordID" 
                     value={password} 
                     onChange={(e)=>setPassword(e.target.value)}
                 />

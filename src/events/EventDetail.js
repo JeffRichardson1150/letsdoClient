@@ -1,3 +1,9 @@
+/*
+ ### called from EventContainer in the eventMapper return() - maps out each row of the container ###
+  <EventDetail event={event} setEventAddedToJar={props.setEventAddedToJar} fetchJarEvents={props.fetchJarEvents} token={props.token} />
+
+*/
+
 import React, {useState, useEffect} from 'react';
 import {Table, Button} from 'reactstrap';
 
@@ -7,13 +13,12 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
-import putEventInJar from '../eventJar/PutEventInJar'
-
 // import JarEventCreate from '../eventJar/JarEventCreate'
 
 import APIURL from '../helpers/environment.js'
 
 const token = localStorage.getItem('token');
+const userName = localStorage.getItem('userName');
 
 
 const useStyles = makeStyles((theme) => ({
@@ -41,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function EventDetail(props) {
+
+  const [clickedJarButton, setClickedJarButton] = useState(false)
+
   const classes = useStyles();  
   let event = props.event;
 
@@ -49,11 +57,12 @@ export default function EventDetail(props) {
     console.log("putInJar, event: ", eventForJar.event)
     console.log(eventForJar.event.image.medium.url)
     console.log("token : ", token)
+    console.log("userName: ", userName)
     fetch(`${APIURL}/api/jar/`, {   // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
       method: 'POST',
       body: JSON.stringify(
           {
-              userName: 'userName', 
+              userName: userName, 
               category: 'category',
               eventID: eventForJar.event.id,
               eventURL: eventForJar.event.url,
@@ -74,7 +83,10 @@ export default function EventDetail(props) {
       })
   }   ) .then((res) => {
       console.log("****** POST was successful ******")
-      props.setEventAddedToJar(true)
+      // props.setEventAddedToJar(true)
+
+      props.fetchJarEvents()     // try this instead of the state variable - refresh the Jar Container after adding one from the Events Container
+
       console.log("EventDetail - set EventAddedToJar")
       return res.json()
   
@@ -93,7 +105,6 @@ export default function EventDetail(props) {
   //       )
   
   }
-  
   
 
   return (
@@ -129,7 +140,6 @@ export default function EventDetail(props) {
             <Grid item xs={2} container direction="column">
             <Button color="warning" size = "sm" onClick={() => putInJar({event})}>Jar</Button>
 
-              {/* <Typography variant="subtitle1">$19.00</Typography> */}
             </Grid>
           </Grid>
         </Grid>
