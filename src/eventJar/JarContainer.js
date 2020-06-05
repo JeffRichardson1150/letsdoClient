@@ -16,13 +16,14 @@ using code from WorkoutTable.js
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Container, Row, Col, Modal, Form, Control, Help } from 'react-bootstrap';
+// import { Table, Button, Container, Row, Col, Modal, Form, Control, Help } from 'react-bootstrap';
+import { Table, Button, Container, Row, Col, Modal, Form } from 'reactstrap';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
+// import { makeStyles } from '@material-ui/core/styles';
+// import Grid from '@material-ui/core/Grid';
+// import Paper from '@material-ui/core/Paper';
+// import Typography from '@material-ui/core/Typography';
+// import ButtonBase from '@material-ui/core/ButtonBase';
 
 import APIURL from '../helpers/environment.js'
 import JarEventDetail from './JarEventDetail'
@@ -75,38 +76,38 @@ const JarContainer = (props) => {
 
     const handleSaveChanges = (event) => {
 
-        const putInJar = (eventForJar) => {
-            fetch(`${APIURL}/api/jar/`, {   // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
-              method: 'POST',
-              body: JSON.stringify(
-                  {
-                      userName: 'userName', 
-                      category: 'category',
-                      eventID: eventForJar.event.id,
-                      eventURL: eventForJar.event.url,
-                      eventImageURL: eventForJar.event.image.medium.url,
-                      eventTitle: eventForJar.event.title,
-                      eventDateTime:  eventForJar.event.start_time,
-                      venueName: eventForJar.event.venue_name,
-                      venueAddress: eventForJar.event.venue_address,
-                      venueCity: eventForJar.event.city_name,
-                      venueState: eventForJar.event.region_abbr,
-                      venueZip: eventForJar.event.postal_code
+    //     const putInJar = (eventForJar) => {
+    //         fetch(`${APIURL}/api/jar/`, {   // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
+    //           method: 'POST',
+    //           body: JSON.stringify(
+    //               {
+    //                   userName: 'userName', 
+    //                   category: 'category',
+    //                   eventID: eventForJar.event.id,
+    //                   eventURL: eventForJar.event.url,
+    //                   eventImageURL: eventForJar.event.image.medium.url,
+    //                   eventTitle: eventForJar.event.title,
+    //                   eventDateTime:  eventForJar.event.start_time,
+    //                   venueName: eventForJar.event.venue_name,
+    //                   venueAddress: eventForJar.event.venue_address,
+    //                   venueCity: eventForJar.event.city_name,
+    //                   venueState: eventForJar.event.region_abbr,
+    //                   venueZip: eventForJar.event.postal_code
           
-                  }
-              ),
-              headers: new Headers({
-                  'Content-Type': 'application/json',
-                  'Authorization': props.token
-              })
-          }   ) .then((res) => {
-              props.setEventAddedToJar(true)
-              return res.json()
+    //               }
+    //           ),
+    //           headers: new Headers({
+    //               'Content-Type': 'application/json',
+    //               'Authorization': props.token
+    //           })
+    //       }   ) .then((res) => {
+    //           props.setEventAddedToJar(true)
+    //           return res.json()
           
-          })
-          .then((logData) => {
-          })
-          }    
+    //       })
+    //       .then((logData) => {
+    //       })
+    //       }    
     }
 
     return (

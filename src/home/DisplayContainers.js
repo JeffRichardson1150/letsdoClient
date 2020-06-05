@@ -6,15 +6,15 @@
 
 
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import JarContainer from '../eventJar/JarContainer';
 import EventContainer from '../events/EventContainer';
 import APIURL from '../helpers/environment.js'
 import './DisplayContainers.css'
 
-import ComplexGrid from '../events/EventDetail'
+// import ComplexGrid from '../events/EventDetail'
 
-import {List, CircularProgress} from "@material-ui/core";
+import {CircularProgress} from "@material-ui/core";
   
 // ### Arguments for the Eventful API call
 // ###    Need to use the city specified in the search field in the Navbar or default to the geolocate location of the use
@@ -30,18 +30,16 @@ let _oArgs = {
     within: 5
   };
   
-  
-  
-  let APIevents = []; // store the array of event objects retrieved from the eventful API (via EVDB.API.call)
-  let APIobject = {};
-  
+//   let APIevents = []; // store the array of event objects retrieved from the eventful API (via EVDB.API.call)
+//   let APIobject = {};
   
   const DisplayContainers = (props) => {
 
     const [jarEvents, setJarEvents] = useState([]);  
     const [eventArray, setEventArray] = useState([]);  // Going to retrieve an array of event objects from eventful API
     const [stillFetching, setStillFetching] = useState(true);  // Going to retrieve an array of event objects from eventful API
-    const [EVDB, setEVDB] = useState(window.EVDB); // For the eventful API calls, pull EVDB from the Script tag in index.html
+    // const [EVDB, setEVDB] = useState(window.EVDB); // For the eventful API calls, pull EVDB from the Script tag in index.html
+    const EVDB = window.EVDB; // For the eventful API calls, pull EVDB from the Script tag in index.html
 
     const userName = localStorage.getItem('userName');
 

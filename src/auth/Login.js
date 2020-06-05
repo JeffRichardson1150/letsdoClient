@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {Form, FormGroup, Label, Input, Button} from 'reactstrap';  //1
+// import {Form, FormGroup, Label, Input, Button} from 'reactstrap';  //1
+import {Form, FormGroup, Label, Button} from 'reactstrap';  //1
 import APIURL from '../helpers/environment.js'
 
 
@@ -48,7 +49,7 @@ const Login = (props) => {
                     <input 
                     type="password" 
                     id="password" 
-                    value={password} 
+                    // value={password} 
                     onChange={(e) => setPassword(e.target.value)} 
                     name="password" 
                     value={password}/>

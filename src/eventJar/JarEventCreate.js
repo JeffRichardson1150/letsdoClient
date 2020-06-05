@@ -8,9 +8,9 @@
    <JarEventCreate event={event} />
 */
 
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Button, Form, FormGroup, Label, Input, Row, Col} from 'reactstrap';
-import { isCompositeComponentWithType } from 'react-dom/test-utils';
+// import { isCompositeComponentWithType } from 'react-dom/test-utils';
 import APIURL from '../helpers/environment.js'
 
 
@@ -19,7 +19,8 @@ const JarEventCreate = (props) => {
 
     const [category, setCategory] = useState('Event Category');
     
-        fetch(`${APIURL}/api/jar/`, {   // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
+    // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
+        fetch(`${APIURL}/api/jar/`, {
         method: 'POST',
         body: JSON.stringify(
             {

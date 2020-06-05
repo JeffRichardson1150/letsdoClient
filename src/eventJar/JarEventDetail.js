@@ -3,8 +3,9 @@
   <JarEventDetail jarEvent={jarEvent} deleteJarEvent={deleteJarEvent} token={props.token} />
 */
 
-import React, {useState, useEffect} from 'react';
-import {Table, Button} from 'reactstrap';
+// import React, {useState, useEffect} from 'react';
+import React from 'react';
+import {Button} from 'reactstrap';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -12,7 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
-import APIURL from '../helpers/environment.js'
+// import APIURL from '../helpers/environment.js'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,7 +58,7 @@ export default function JarEventDetail(props) {
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle2">
-                <a href={jarEvent.eventURL} target="_blank">{jarEvent.eventTitle}</a>
+                <a href={jarEvent.eventURL} target="_blank" rel="noopener noreferrer">{jarEvent.eventTitle}</a>
                 </Typography>
                 <Typography variant="subtitle2" gutterBottom>
                   {jarEvent.eventDateTime}

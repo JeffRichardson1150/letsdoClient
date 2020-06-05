@@ -4,8 +4,9 @@
 
 */
 
-import React, {useState, useEffect} from 'react';
-import {Table, Button} from 'reactstrap';
+// import React, {useState, useEffect} from 'react';
+import React from 'react';
+import {Button} from 'reactstrap';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EventDetail(props) {
 
-  const [clickedJarButton, setClickedJarButton] = useState(false)
+  // const [clickedJarButton, setClickedJarButton] = useState(false)
 
   const classes = useStyles();  
   let event = props.event;
@@ -97,7 +98,7 @@ export default function EventDetail(props) {
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle2">
-                <a href={event.url} target="_blank">{event.title}</a>
+                <a href={event.url} target="_blank" rel="noopener noreferrer">{event.title}</a>
                 </Typography>
                 <Typography variant="subtitle2" gutterBottom>
                   {event.start_time}

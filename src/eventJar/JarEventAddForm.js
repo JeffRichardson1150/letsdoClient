@@ -5,28 +5,31 @@
   <JarEventAddForm />
 */
 
-import React, {useState, useEffect} from "react";
-import DatePicker from "react-datepicker";
+// import React, {useState, useEffect} from "react";
+import React from "react";
+// import DatePicker from "react-datepicker";
 
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
  
 import "react-datepicker/dist/react-datepicker.css";
-import TimePicker from 'react-time-picker';
+// import TimePicker from 'react-time-picker';
  
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
  
 const JarEventAddForm = () => {
 
-    const [startDate, setStartDate] = useState( new Date() );
-    const [time, setTime] = useState('20:00:00')
+    // const [startDate, setStartDate] = useState( new Date() );
+    // const [time, setTime] = useState('20:00:00')
+    const startDate = new Date();
+    const time = '20:00:00'
 
-  const handleDateChange = date => {
-      setStartDate(date)
-    };
+//   const handleDateChange = date => {
+//       setStartDate(date)
+//     };
 
-    const handleTimeChange = time => setTime(time)
+    // const handleTimeChange = time => setTime(time)
 
  
     return (
