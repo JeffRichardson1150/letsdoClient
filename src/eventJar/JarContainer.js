@@ -16,7 +16,6 @@ using code from WorkoutTable.js
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import React, { useState, useEffect } from 'react';
-// import {Table, Button, Container, Row, Col, Modal} from 'reactstrap';
 import { Table, Button, Container, Row, Col, Modal, Form, Control, Help } from 'react-bootstrap';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -28,11 +27,7 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import APIURL from '../helpers/environment.js'
 import JarEventDetail from './JarEventDetail'
 
-// import JarEventDatePicker from './JarEventDatePicker'
 import JarEventAddForm from './JarEventAddForm'
-
-
-// const token = localStorage.getItem('token');
 
 
 const JarContainer = (props) => {
@@ -44,22 +39,6 @@ const JarContainer = (props) => {
 
 
     //  ################################ for the Jar button on an event to store in the jar table ################################
-    // console.log("addEventToJar state variable = ", props.addEventToJar)
-    console.log("JarContainer props: ", props)
-    // Need to convert this code to suit my jars vs workouts
-    // workouts is a state variable / my state variable is jarEvent...it's set to logData in fetchWorkouts (fetchJarEvents in JarFetch.js) 
-    // after an /api/log call
-    // workout is a variable defined in the .map method used in workoutMapper in this Component (below)
-    // const deleteWorkout = (workout) => {
-    //     fetch(`http://localhost:3000/api/log/${workout.id}`, {
-    //         method: 'DELETE',
-    //         headers: new Headers({
-    //             'Content-Type': 'application/json',
-    //             'Authorization': props.token
-    //         })
-    //     })
-    //     .then(() => props.fetchWorkouts())
-    // }
     const deleteJarEvent = (jarEvent) => {
         console.log(jarEvent)
         // fetch(`http://localhost:3000/api/jar/${jarEvent.id}`, {
@@ -76,7 +55,6 @@ const JarContainer = (props) => {
 
     // Convert this workouts code to apply to my jars 
     const jarEventMapper = () => {
-        console.log("You're in jarEventMapper. props = ", props)
         return props.jarEvents.map((jarEvent, index) => {
             return (
 
@@ -94,41 +72,11 @@ const JarContainer = (props) => {
 
     //  ################################ for the Jar button on an event to store in the jar table ################################
     useEffect(() => {
-        console.log("***** You're in the JarContainer useEffect watching addEventToJar, the Jar button on the Event Container. changed to: ", props.addEventToJar)
-        // create jar event
-        // jarEventMapper();
-        // ??? EventContainer(props.addEventToJar);
     }, [props.addEventToJar])
-
-    // const AddEventForm = () => {
-    //     console.log("***** This is function AddEventForm ********")
-    //     return (
-    //         <div>
-    //             <Modal>
-    //                 <Modal.Header closeButton>
-    //                     <Modal.Title>Modal title</Modal.Title>
-    //                 </Modal.Header>
-
-    //                 <Modal.Body>
-    //                     <p>Modal body text goes here.</p>
-    //                 </Modal.Body>
-
-    //                 <Modal.Footer>
-    //                     <Button variant="secondary">Close</Button>
-    //                     <Button variant="primary">Save changes</Button>
-    //                 </Modal.Footer>
-    //             </Modal>
-    //         </div>
-    //     )
-    // }
 
     const handleSaveChanges = (event) => {
 
         const putInJar = (eventForJar) => {
-            // console.log(eventForJar)
-            console.log("putInJar, event: ", eventForJar.event)
-            console.log(eventForJar.event.image.medium.url)
-            console.log("token : ", props.token)
             fetch(`${APIURL}/api/jar/`, {   // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
               method: 'POST',
               body: JSON.stringify(
@@ -153,29 +101,14 @@ const JarContainer = (props) => {
                   'Authorization': props.token
               })
           }   ) .then((res) => {
-              console.log("****** POST was successful ******")
               props.setEventAddedToJar(true)
-              console.log("EventDetail - set EventAddedToJar")
               return res.json()
           
           })
           .then((logData) => {
-              console.log("************************* res.json successful - logData = ", logData);
-          //     // setCategory('Event Category');
-          //     // setCity('Event City');
-          //     // setDate('Event Date');
-              // props.fetchJarEvents();
-              // props.setEventAddedToJar('true')
           })
-          
-          //   return(
-          //   {/* <JarEventCreate event={event} /> */}
-          //       )
-          
-          }
-    
+          }    
     }
-
 
     return (
         <>
@@ -191,7 +124,6 @@ const JarContainer = (props) => {
                 </Row>
 
             </Container>
-            {/* <hr/> */}
             <Table >
                 <tbody>
                     {jarEventMapper()}

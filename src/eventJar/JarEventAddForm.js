@@ -13,8 +13,6 @@ import Col from 'react-bootstrap/Col'
  
 import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from 'react-time-picker';
-
-
  
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
@@ -57,25 +55,9 @@ const JarEventAddForm = () => {
         <Form.Group as={Col} controlId="formGridTime">
         <Form.Label>Start Time</Form.Label>
         <Form.Control type="time" value={time} />
-            {/* <TimePicker
-                onChange={handleTimeChange}
-                value={time}
-            /> */}
 
             </Form.Group>
         </Form.Row>
-
-        {/* <Form.Row>
-            <Form.Group as={Col} controlId="formGridEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
-            </Form.Group>
-
-            <Form.Group as={Col} controlId="formGridPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-        </Form.Row> */}
 
         <Form.Group controlId="formGridVenue">
             <Form.Label>Venue Name</Form.Label>

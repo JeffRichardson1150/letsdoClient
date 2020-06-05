@@ -14,9 +14,6 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 
 import APIURL from '../helpers/environment.js'
 
-// const token = localStorage.getItem('token');
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,

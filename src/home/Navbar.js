@@ -34,10 +34,6 @@ import { //1
     DropdownItem
 } from 'reactstrap';
 
-// import {Form, FormGroup, Label, Input, Button} from 'reactstrap';  //1
-
-
-
 const Sitebar = (props) => { //2
     
     console.log("************ HELLO FROM SITEBAR IN NAVBAR.JS ****************")
@@ -49,22 +45,14 @@ const Sitebar = (props) => { //2
     const toggle = () => {
         let newIsOpen = !isOpen;
         setIsOpen(newIsOpen);
-        console.log("in toggle....isOpen : ", isOpen)
     }
     //3
     return (
         <Navbar color="faded" light expand="md">
             <NavbarBrand href="/">Letsdo</NavbarBrand>
-            {/* Logout button */}
             <NavbarToggler onClick={toggle} />
             <Collapse isOpen={isOpen} navbar>  {/* what's this do? */}
                 <Nav className="ml-auto" navbar>
-                    {/* <Form inline>
-                        <FormControl>
-
-                        </FormControl>
-                    </Form> */}
-
                      {/* <Form inline>
                         <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
                         <Button type="submit">Submit</Button>

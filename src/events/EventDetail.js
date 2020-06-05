@@ -13,8 +13,6 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
-// import JarEventCreate from '../eventJar/JarEventCreate'
-
 import APIURL from '../helpers/environment.js'
 
 const token = localStorage.getItem('token');
@@ -53,11 +51,6 @@ export default function EventDetail(props) {
   let event = props.event;
 
   const putInJar = (eventForJar) => {
-    // console.log(eventForJar)
-    console.log("putInJar, event: ", eventForJar.event)
-    console.log(eventForJar.event.image.medium.url)
-    console.log("token : ", token)
-    console.log("userName: ", userName)
     fetch(`${APIURL}/api/jar/`, {   // calls localhost or heroku server based on APIURL which is set in helpers/environment.js
       method: 'POST',
       body: JSON.stringify(
@@ -83,7 +76,6 @@ export default function EventDetail(props) {
       })
   }   ) .then((res) => {
       console.log("****** POST was successful ******")
-      // props.setEventAddedToJar(true)
 
       props.fetchJarEvents()     // try this instead of the state variable - refresh the Jar Container after adding one from the Events Container
 
@@ -92,22 +84,10 @@ export default function EventDetail(props) {
   
   })
   .then((logData) => {
-      console.log("************************* res.json successful - logData = ", logData);
-  //     // setCategory('Event Category');
-  //     // setCity('Event City');
-  //     // setDate('Event Date');
-      // props.fetchJarEvents();
-      // props.setEventAddedToJar('true')
   })
-  
-  //   return(
-  //   {/* <JarEventCreate event={event} /> */}
-  //       )
-  
   }
   
-
-  return (
+ return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <Grid container spacing={2}>
