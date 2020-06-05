@@ -15,7 +15,6 @@ const Login = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("******************* I'm in handleSubmit ********************************")
         // fetch("http://localhost:3000/api/login", {
         fetch(`${APIURL}/api/login`, {
             method: 'POST',
@@ -26,11 +25,8 @@ const Login = (props) => {
         }).then(
             (response) => response.json()
         ).then((data) => {
-            console.log("**************************** calling updateToken with data.sessionToken: ", data.sessionToken)
             props.updateToken(data.sessionToken, userName)
-            console.log("****************************** back from updateToken with props = ", props)
         })
-        // console.log(userName, password)
     }
 
 
@@ -46,8 +42,6 @@ const Login = (props) => {
                         name="userName" 
                         value={userName}
                         onChange={(e) => setUserName(e.target.value)}/>
-                    {/* {console.log(userName)} */}
-                    {/* <Input name="userName" value={userName}/>  3 */}
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password">Password</Label>
@@ -58,8 +52,6 @@ const Login = (props) => {
                     onChange={(e) => setPassword(e.target.value)} 
                     name="password" 
                     value={password}/>
-                    {/* <Input name="password" value={password}/>  3 */}
-                    {/* {console.log(password)} */}
 
                 </FormGroup>
                 <Button color="primary" type="submit">Login</Button>

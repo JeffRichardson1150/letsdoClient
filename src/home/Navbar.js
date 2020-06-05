@@ -36,8 +36,6 @@ import { //1
 
 const Sitebar = (props) => { //2
     
-    console.log("************ HELLO FROM SITEBAR IN NAVBAR.JS ****************")
-
     const [isOpen, setIsOpen] = useState(false);
     const [location, setLocation] = useState('');
 

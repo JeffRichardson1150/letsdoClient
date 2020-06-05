@@ -75,11 +75,7 @@ export default function EventDetail(props) {
           'Authorization': token
       })
   }   ) .then((res) => {
-      console.log("****** POST was successful ******")
-
       props.fetchJarEvents()     // try this instead of the state variable - refresh the Jar Container after adding one from the Events Container
-
-      console.log("EventDetail - set EventAddedToJar")
       return res.json()
   
   })

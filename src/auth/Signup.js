@@ -14,7 +14,6 @@ import APIURL from '../helpers/environment.js'
                 */
 
 const Signup = (props) => {
-    console.log("********************** HELLO FROM SIGNUP.JS ***********************");
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     // let userName = '';
@@ -22,9 +21,6 @@ const Signup = (props) => {
     
     const handleSubmit = (event) => {
         event.preventDefault();  // prevent refresh of the screen from a Form submit
-        console.log( JSON.stringify({user:{userName: userName, password: password}}) );
-        console.log( JSON.stringify({userName: userName, password: password}) );
-        // fetch("http://localhost:3000/api/user", {
         fetch(`${APIURL}/api/user`, {
             method: 'POST',
             body: JSON.stringify({userName: userName, password: password}),
@@ -35,15 +31,11 @@ const Signup = (props) => {
             (response) => 
                 response.json()            
             ).then((data) => {
-                // console.log("the next .then with props = ", props)
-                console.log("Signup POST user. data: ", data)
                 props.updateToken(data.sessionToken, userName) // sessionToken gets created in usercontroller with JWT
 
             })
         }
 
-        // console.log("****** Signup.js .then - /api/user was successful *******")
-        // console.log(response.json())
         
         return(
             <div>

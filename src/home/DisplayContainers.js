@@ -66,7 +66,6 @@ let _oArgs = {
     // ########## FUNCTION FETCH EVENTS : GET EVENTS FROM EVENTFUL API AND DISPLAY IN A LIST ON CONSOLE 
     const fetchEvents = async () => {  // trying async & await
         if (EVDB !== undefined) {
-            console.log("EVDB is not undefined")
             EVDB.API.call("/events/search", _oArgs, 
             function (APIobject) {
                 setStillFetching(false)
@@ -78,7 +77,6 @@ let _oArgs = {
         }  
       
       useEffect(() => {
-          console.log(`USE EFFECT TRIGGERED`)
         fetchJarEvents()
         fetchEvents()
     }, [])
